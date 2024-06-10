@@ -1,0 +1,9 @@
+import wollok.game.*
+import juego.*
+
+program snakes {
+	
+	snake.iniciar()
+    
+    
+}
