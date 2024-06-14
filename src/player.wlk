@@ -1,8 +1,59 @@
 import wollok.game.*
 import juego.*
 
+const lasPartesDeSnake = []
 
-object jugador {
+class ParteDeSnake {
+	var property aDondeIr = "left"
+	var siguienteaDondeIr = "left"
+	var property nroDeParte = 0
+	var position = game.center()
+	var property imagen = "cabeza.png"
+	method conseguirSiguienteaDondeIr(){
+		siguienteaDondeIr = (lasPartesDeSnake.find(
+			{p => p.nroDeParte() +1 == self.nroDeParte()}
+		).aDondeIr())
+	}
+	method moverse(){
+		self.conseguirSiguienteaDondeIr()
+		if (aDondeIr == "left"){
+			position = position.left(1)
+		} if (aDondeIr == "up"){
+			position = position.up(1)
+		} if (aDondeIr == "right"){
+			position = position.right(1)
+		} if (aDondeIr == "down"){
+			position = position.down(1)
+		}
+		aDondeIr = siguienteaDondeIr
+		
+	}
+	
+}
+
+class CabezaDeSnake inherits ParteDeSnake {
+	override method conseguirSiguienteaDondeIr(){
+		keyboard.up().onPressDo(siguienteaDondeIr = "up")
+		keyboard.down().onPressDo(siguienteaDondeIr = "down")
+		keyboard.left().onPressDo(siguienteaDondeIr = "left")
+		keyboard.right().onPressDo(siguienteaDondeIr = "right")
+	}
+	override method moverse(){
+		if (aDondeIr == "left"){
+			position = position.left(1)
+		} if (aDondeIr == "up"){
+			position = position.up(1)
+		} if (aDondeIr == "right"){
+			position = position.right(1)
+		} if (aDondeIr == "down"){
+			position = position.down(1)
+		}
+		aDondeIr = siguienteaDondeIr
+	}
+}
+
+
+/*object jugador {
 	
 	var position = game.at(1,1)
 	
@@ -47,8 +98,8 @@ object jugador {
 	}
 		
 	
-}
-class Cuerpo{
+}*/
+/*class Cuerpo{
 	
 	var position = 0
 	
@@ -60,4 +111,4 @@ class Cuerpo{
 		position = posicion
 	}
 	
-}
+}*/

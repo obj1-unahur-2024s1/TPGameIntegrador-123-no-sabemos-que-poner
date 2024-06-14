@@ -1,9 +1,17 @@
 import wollok.game.*
 import juego.*
+import player.*
+
 
 program snakes {
-	
-	snake.iniciar()
-    
-    
+	    game.cellSize(32)
+		game.height(15)
+		game.width(15)
+		
+		const jugador = new CabezaDeSnake()
+		game.addVisual(jugador)
+		
+		game.onTick(4000, "movimientoDelJugador",{jugador.moverse()})
+			
+		game.start()
 }

@@ -12,11 +12,8 @@ object snake{
 		game.start()
 	}
 	method personaje(){
+		const jugador = new CabezaDeSnake()
 		game.addVisual(jugador)
-		keyboard.up().onPressDo{jugador.moveArriba()}
-		keyboard.down().onPressDo{jugador.moveAbajo()}
-		keyboard.left().onPressDo{jugador.moveIzquierda()}
-		keyboard.right().onPressDo{jugador.moveDerecha()}
 	}
 }
 
