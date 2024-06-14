@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import player.*
+import items.*
 
 
 program snakes {
@@ -9,9 +10,10 @@ program snakes {
 		game.width(15)
 		
 		const jugador = new CabezaDeSnake()
+		lasPartesDeSnake.add(jugador)
 		game.addVisual(jugador)
 		
-		game.onTick(4000, "movimientoDelJugador",{jugador.moverse()})
+		game.onTick(1000, "movimientoDelJugador",{jugador.moverse()})
 			
 		game.start()
 }

@@ -1,0 +1,14 @@
+import wollok.game.*
+import juego.*
+import player.*
+
+const dondeAparecer = []
+
+class ItemEnNivel{
+	var position = game.origin()
+	method reubicar(){
+		dondeAparecer.add(position)
+		position = dondeAparecer.anyOne()
+		dondeAparecer.remove(position)
+	}
+}

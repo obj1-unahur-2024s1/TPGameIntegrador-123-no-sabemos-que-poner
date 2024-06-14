@@ -1,14 +1,15 @@
 import wollok.game.*
 import juego.*
+import items.*
 
 const lasPartesDeSnake = []
 
 class ParteDeSnake {
-	var property aDondeIr = "left"
-	var siguienteaDondeIr = "left"
+	var property aDondeIr = "right"
+	var property siguienteaDondeIr = "right"
 	var property nroDeParte = 0
-	var position = game.center()
-	var property imagen = "cabeza.png"
+	var property position = game.center()
+	var property image = "cabeza.png" //importa que sea una propiedad para que se abra el programa
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (lasPartesDeSnake.find(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
