@@ -5,15 +5,8 @@ import items.*
 
 
 program snakes {
-	    game.cellSize(32)
-		game.height(15)
-		game.width(15)
-		
-		const jugador = new CabezaDeSnake()
-		lasPartesDeSnake.add(jugador)
-		game.addVisual(jugador)
-		
-		game.onTick(1000, "movimientoDelJugador",{jugador.moverse()})
-			
-		game.start()
+	
+	snake.iniciar()
+	
+	    
 }

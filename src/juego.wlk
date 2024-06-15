@@ -3,17 +3,26 @@ import player.*
 
 object snake{
 	
-	method iniciar(){
-		
+ method iniciar(){
 		game.cellSize(32)
 		game.height(15)
 		game.width(15)
-		self.personaje()	
-		game.start()
+		self.personaje()
+	    game.start()
+	    
 	}
-	method personaje(){
+    method personaje(){
 		const jugador = new CabezaDeSnake()
 		game.addVisual(jugador)
+		
+		lasPartesDeSnake.add(jugador)
+		
+		keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
+		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")})
+		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
+		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})
+		
+		game.onTick(500, "movimientoDelJugador",{jugador.moverse()})
 	}
 }
 

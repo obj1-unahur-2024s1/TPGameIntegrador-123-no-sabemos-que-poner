@@ -15,6 +15,15 @@ class ParteDeSnake {
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
 		).aDondeIr())
 	}
+	method siguienteaDondeIr(direccion){
+		siguienteaDondeIr = direccion
+	}
+	
+	method siguienteaDondeIr(){
+		return siguienteaDondeIr
+	}
+	
+	
 	method moverse(){
 		self.conseguirSiguienteaDondeIr()
 		if (aDondeIr == "left"){
