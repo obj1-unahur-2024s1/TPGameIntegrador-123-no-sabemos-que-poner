@@ -9,23 +9,15 @@ class ParteDeSnake {
 	var property siguienteaDondeIr = "right"
 	var property nroDeParte = 0
 	var property position = game.center()
-	var property image = "cabeza.png" //importa que sea una propiedad para que se abra el programa
+	var property image = "cuerpo.png" //importa que sea una propiedad para que se abra el programa
+	
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (lasPartesDeSnake.find(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
 		).aDondeIr())
 	}
-	method siguienteaDondeIr(direccion){
-		siguienteaDondeIr = direccion
-	}
-	
-	method siguienteaDondeIr(){
-		return siguienteaDondeIr
-	}
-	
-	
 	method moverse(){
-		self.conseguirSiguienteaDondeIr()
+		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
 		} if (aDondeIr == "up"){
@@ -35,13 +27,13 @@ class ParteDeSnake {
 		} if (aDondeIr == "down"){
 			position = position.down(1)
 		}
-		aDondeIr = siguienteaDondeIr
-		
-	}
-	
+		self.conseguirSiguienteaDondeIr()
+	}	
 }
 
 class CabezaDeSnake inherits ParteDeSnake {
+	override method image() = "cabeza.png"
+	
 	override method conseguirSiguienteaDondeIr(){
 		keyboard.up().onPressDo(siguienteaDondeIr = "up")
 		keyboard.down().onPressDo(siguienteaDondeIr = "down")
@@ -49,6 +41,7 @@ class CabezaDeSnake inherits ParteDeSnake {
 		keyboard.right().onPressDo(siguienteaDondeIr = "right")
 	}
 	override method moverse(){
+		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
 		} if (aDondeIr == "up"){
@@ -58,7 +51,6 @@ class CabezaDeSnake inherits ParteDeSnake {
 		} if (aDondeIr == "down"){
 			position = position.down(1)
 		}
-		aDondeIr = siguienteaDondeIr
 	}
 }
 
