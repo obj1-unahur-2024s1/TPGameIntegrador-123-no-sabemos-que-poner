@@ -4,9 +4,9 @@ import player.*
 object snake{
 	
  method iniciar(){
-		game.cellSize(32)
-		game.height(15)
-		game.width(15)
+		game.cellSize(72)
+		game.height(14)
+		game.width(18)
 		self.personaje()
 	    game.start()
 	    
@@ -29,7 +29,7 @@ object snake{
 		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
 		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})
 		
-		game.onTick(500, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
+		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
 	}
 }
 

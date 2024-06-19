@@ -20,19 +20,23 @@ class ParteDeSnake {
 		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
+			image = "cuerpoIzqDer.png"
 		} if (aDondeIr == "up"){
 			position = position.up(1)
+			image = "cuerpoArAb.png"
 		} if (aDondeIr == "right"){
 			position = position.right(1)
+			image = "cuerpoIzqDer.png"
 		} if (aDondeIr == "down"){
 			position = position.down(1)
+			image = "cuerpoArAb.png"
 		}
 		self.conseguirSiguienteaDondeIr()
 	}	
 }
 
 class CabezaDeSnake inherits ParteDeSnake {
-	override method image() = "cabeza.png"
+	override method image() = image
 	
 	override method conseguirSiguienteaDondeIr(){
 		keyboard.up().onPressDo(siguienteaDondeIr = "up")
@@ -44,12 +48,16 @@ class CabezaDeSnake inherits ParteDeSnake {
 		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
+			image = "cabezaIzquierda.png"
 		} if (aDondeIr == "up"){
 			position = position.up(1)
+			image = "cabezaArriba.png"
 		} if (aDondeIr == "right"){
 			position = position.right(1)
+			image = "cabezaDerecha.png"
 		} if (aDondeIr == "down"){
 			position = position.down(1)
+			image = "cabezaAbajo.png"
 		}
 	}
 }
