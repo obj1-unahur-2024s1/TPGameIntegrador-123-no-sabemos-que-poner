@@ -12,17 +12,24 @@ object snake{
 	    
 	}
     method personaje(){
-		const jugador = new CabezaDeSnake(position = game.at(2,3))
-		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1)
-		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2)
+		const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
+		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
+		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
+		const man1 = new Manzana(position = game.at(10,10))
+		const man2 = new Manzana(position = game.at(5,10))
 		game.addVisual(jugador)
 		game.addVisual(parte1)
 		game.addVisual(parte2)
+		game.addVisual(man1)
+		game.addVisual(man2)
 		
 		
 		lasPartesDeSnake.add(jugador)
 		lasPartesDeSnake.add(parte1)
 		lasPartesDeSnake.add(parte2)
+		game.onCollideDo(jugador,{a => a.comido()})
+		
+		
 		
 		keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
 		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")})

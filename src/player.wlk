@@ -5,12 +5,13 @@ import items.*
 const lasPartesDeSnake = []
 
 class ParteDeSnake {
-	var property aDondeIr = "right"
-	var property siguienteaDondeIr = "right"
+	var property aDondeIr = null
+	var property siguienteaDondeIr = null
 	var property nroDeParte = 0
 	var property position = game.center()
-	var property image = "cuerpo.png" //importa que sea una propiedad para que se abra el programa
+	var property image = "cuerpoArAb.png" //importa que sea una propiedad para que se abra el programa
 	
+	method siguienteaDondeIr() = siguienteaDondeIr
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (lasPartesDeSnake.find(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
@@ -33,6 +34,8 @@ class ParteDeSnake {
 		}
 		self.conseguirSiguienteaDondeIr()
 	}	
+	
+	method comido(){}
 }
 
 class CabezaDeSnake inherits ParteDeSnake {
@@ -61,7 +64,22 @@ class CabezaDeSnake inherits ParteDeSnake {
 		}
 	}
 }
-
+class Manzana{
+	var position
+	var image = "manzana.png"
+	method position() = position
+	method image() = image
+	method comido(){
+		 
+	     lasPartesDeSnake.add(new ParteDeSnake(
+	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
+	     	position = lasPartesDeSnake.last().position()))
+	     	 
+	     game.addVisual(lasPartesDeSnake.last())
+	     game.removeVisual(self)
+	     
+	}
+}
 
 /*object jugador {
 	
