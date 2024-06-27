@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Redenominar el recurso &apos;DJsnakeAgus/src/example.wlk&apos; como &apos;jugdor.wlk&apos;" description="Redenominar recurso &apos;example.wlk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/example.wlk" name="jugdor.wlk" stamp="1718665779337" updateReferences="true"/>&#x0A;<refactoring comment="Redenominar el recurso &apos;DJsnakeAgus/src/jugdor.wlk&apos; como &apos;juego.wlk&apos;" description="Redenominar recurso &apos;jugdor.wlk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/jugdor.wlk" name="juego.wlk" stamp="1718735699959" updateReferences="true"/>
-</session>

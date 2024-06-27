@@ -1,7 +1,0 @@
-import juegoViboraGPT.*
-
-program abc {
-
-	snake.iniciarJuego()
-
-}

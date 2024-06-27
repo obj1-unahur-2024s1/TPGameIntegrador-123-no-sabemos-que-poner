@@ -1,3 +1,0 @@
-<?xml version="1.0" encoding="UTF-8"?>
-<session version="1.0">&#x0A;<refactoring comment="Redenominar el recurso &apos;parcialPracticaKinesiologia/src/example.wlk&apos; como &apos;aparatos.wlk&apos;" description="Redenominar recurso &apos;example.wlk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/example.wlk" name="aparatos.wlk" stamp="1719340673348" updateReferences="true"/>&#x0A;<refactoring comment="Redenominar el recurso &apos;parcialPracticaKinesiologia/src/objects.wlk&apos; como &apos;pacientes.wlk&apos;" description="Redenominar recurso &apos;objects.wlk&apos;" flags="7" id="org.eclipse.ltk.core.refactoring.rename.resource" input="src/objects.wlk" name="pacientes.wlk" stamp="1719345240095" updateReferences="true"/>
-</session>
