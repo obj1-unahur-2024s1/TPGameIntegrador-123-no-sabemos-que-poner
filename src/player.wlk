@@ -81,6 +81,10 @@ class Manzana{
 	}
 }
 
+<<<<<<< HEAD
+=======
+//
+>>>>>>> parent of 9d1b371 (movimiento ultimo commit)
 /*object jugador {
 	
 	var position = game.at(1,1)
