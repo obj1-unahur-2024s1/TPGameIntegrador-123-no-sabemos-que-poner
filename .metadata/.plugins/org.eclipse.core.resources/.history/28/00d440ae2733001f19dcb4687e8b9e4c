@@ -1,0 +1,7 @@
+class CentroKinesiologia {}
+
+class Paciente {
+	var property edad = 0
+	var property nivelDeFortaleza = 0
+	var property nivelDeDolor = 0	
+}

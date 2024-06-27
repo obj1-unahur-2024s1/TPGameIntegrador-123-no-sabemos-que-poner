@@ -1,0 +1,43 @@
+import aparatos.*
+
+class CentroKinesiologia {}
+
+class Paciente {
+	var property edad = 0
+	var property nivelDeFortaleza = 0
+	var property nivelDeDolor = 0
+	const rutina = []
+	
+	method asignarRutina(sesion) = rutina.addAll(sesion)
+	
+	method puedeRealizarLaRutina() = rutina.all({aparato => aparato.puedeSerUsadoPor(self)})
+	
+	method realizarRutina() {rutina.forEach({aparato => aparato.usar(self)})}
+}
+
+class PacienteResistente inherits Paciente {
+	
+	override method realizarRutina() {
+		super()
+		self.nivelDeFortaleza(self.nivelDeFortaleza() + rutina.size())
+	}
+}
+
+class PacienteCaprichoso inherits Paciente {
+	override method puedeRealizarLaRutina() = super() and rutina.any({aparato => aparato.color() == "rojo"})
+	
+	override method realizarRutina() {
+		super()
+		rutina.forEach({aparato => aparato.usar(self)})
+	}
+}
+
+class PacienteRapidaRecuperacion inherits Paciente {
+
+	
+	override method realizarRutina() {
+		super()
+		self.nivelDeDolor(0.max(self.nivelDeDolor() - 3))
+	}
+}
+

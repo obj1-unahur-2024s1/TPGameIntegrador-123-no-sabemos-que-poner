@@ -1,0 +1,87 @@
+import hogwarts.*
+import hechizos.*
+
+class CriaturaMagica {
+	var property salud = 0
+	var property esInmune = false
+	const property puedeLanzarHechizo = false
+	
+	method recibirHechizo(hechizo) {
+		hechizo.consecuencias(self)
+	}
+}
+
+class Estudiante {
+	var property salud = 0
+	var property nivelDeHabilidad = 0
+	var property sangre = ""
+	var casa = ""
+	const property hechizos = []
+	const property puedeLanzarHechizo = true
+	
+	method casa() = casa
+	
+	method casa(sombrero) {casa = sombrero}
+	
+	method esPeligroso() = false
+	
+	method asistirAClase(materia) {
+		hechizos.add(materia.hechizoActual())
+		nivelDeHabilidad = nivelDeHabilidad + 1
+		materia.inscribirEstudiante(self)
+	}
+	
+	method darMateriaDeBaja(materia) {
+		materia.cancelarInscripcion()
+	}
+	
+	method hechizosAprendidos() = hechizos
+	
+	method lanzarHechizo(hechizo) {
+		hechizo.consecuencias(self)
+	}
+	
+	method recibirHechizo(hechizo) {
+		hechizo.consecuencias(self)
+	}
+}
+
+class EstudianteGryffindor inherits Estudiante {
+	
+	override method casa(sombrero) {casa = "Gryffindor"}
+	
+	override method esPeligroso() = false 
+}
+
+class EstudianteSlytherin inherits Estudiante {
+	
+	override method casa(sombrero) {casa = "Slytherin"}
+	
+	override method esPeligroso() = salud != 0
+}
+
+class EstudianteRavenclaw inherits Estudiante {
+	
+	override method casa(sombrero) {casa = "Ravenclaw"}
+	
+	override method esPeligroso() =  salud != 0 and nivelDeHabilidad > 10
+}
+
+class EstudianteHufflepuff inherits Estudiante {
+	
+	override method casa(sombrero) {casa = "Hufflepuff"}
+	
+	override method esPeligroso() = salud != 0 and sangre == "Pura" 
+}
+
+
+
+
+
+
+
+
+
+
+
+

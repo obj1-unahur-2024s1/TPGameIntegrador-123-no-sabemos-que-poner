@@ -1,0 +1,62 @@
+import aparatos.*
+
+object centroKinesiologia {
+	const pacientes = []
+	const maquinaria = []
+	
+	method asignarPacientes(lista) = pacientes.addAll(lista)
+	
+	method asignarAparatos(lista) = maquinaria.addAll(lista)
+	
+	method coloresDeAparatos() = maquinaria.map({aparato => aparato.color()}).asSet()
+	
+	method pacientesMenores() = pacientes.filter({paciente => paciente.edad() < 8})
+	
+	method noPuedenRealizarRutina() = pacientes.count({paciente => not paciente.puedeRealizarLaRutina()})
+	
+	method estaEnOptimasCondiciones() = maquinaria.filter({aparato => aparato.necesitaMantenimiento()}).isEmpty()
+	
+	method estaComplicado() = maquinaria.filter({aparato => aparato.necesitaMantenimiento()}) >= maquinaria.size() / 2
+	
+	method visitaTecnica() = maquinaria.filter({aparato => aparato.necesitaMantenimiento()}).forEach({aparato => aparato.darMantenimiento()})
+}
+
+class Paciente {
+	var property edad = 0
+	var property nivelDeFortaleza = 0
+	var property nivelDeDolor = 0
+	const rutina = []
+	
+	method asignarRutina(sesion) = rutina.addAll(sesion)
+	
+	method puedeRealizarLaRutina() = rutina.all({aparato => aparato.puedeSerUsadoPor(self)})
+	
+	method realizarRutina() {rutina.forEach({aparato => aparato.usar(self)})}
+}
+
+class PacienteResistente inherits Paciente {
+	
+	override method realizarRutina() {
+		super()
+		self.nivelDeFortaleza(self.nivelDeFortaleza() + rutina.size())
+	}
+}
+
+class PacienteCaprichoso inherits Paciente {
+	override method puedeRealizarLaRutina() = super() and rutina.any({aparato => aparato.color() == "rojo"})
+	
+	override method realizarRutina() {
+		super()
+		rutina.forEach({aparato => aparato.usar(self)})
+	}
+}
+
+class PacienteRapidaRecuperacion inherits Paciente {
+	var property reducirDolor = 3
+	
+	override method realizarRutina() {
+		super()
+		self.nivelDeDolor(0.max(self.nivelDeDolor() - reducirDolor))
+	}
+}
+

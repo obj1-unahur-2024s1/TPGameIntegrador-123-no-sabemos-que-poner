@@ -1,0 +1,16 @@
+<?xml version="1.0" encoding="UTF-8"?>
+<workingSetManager>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1718661565580_0" label="Fuentes Java —destacados—" name="Java Main Sources">
+<item elementID="=plantsvszombies_wollok/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=plantsvszombies_wollok/assets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fix-it-felix-wollok/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=fix-it-felix-wollok/assets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=juego/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=juego/assets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=tpgame-objetos-de-noche/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=tpgame-objetos-de-noche/assets" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+<item elementID="=2023-tpgame-mathbros/src" factoryID="org.eclipse.jdt.ui.PersistableJavaElementFactory"/>
+</workingSet>
+<workingSet editPageId="org.eclipse.jdt.internal.ui.DynamicSourcesWorkingSet" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1718661565621_1" label="Fuentes Java —pruebas—" name="Java Test Sources"/>
+<workingSet aggregate="true" factoryID="org.eclipse.ui.internal.WorkingSetFactory" id="1718661570017_2" label="Conjunto de trabajo de la ventana" name="Aggregate for window 1718661570009"/>
+</workingSetManager>

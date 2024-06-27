@@ -1,0 +1,45 @@
+import wollok.game.*
+import player.*
+import items.*
+
+object snake {
+	
+    method personaje(){
+		const jugador = new CabezaDeSnake(image = "cabezaDerecha.png")
+		const parte1 = new ParteDeSnake(position = game.at(6,7))
+		const colaSnake = new Cola(image = "cola.png", position = game.at(5,7))
+		const apple = new ItemEnNivel(image = "manzana.png")
+		game.addVisual(jugador)
+		game.addVisual(parte1)
+		game.addVisual(colaSnake)
+		game.addVisualIn(apple, apple.posicion())
+		
+		lasPartesDeSnake.add(jugador)
+		lasPartesDeSnake.add(parte1)
+		lasPartesDeSnake.add(colaSnake)
+		
+		
+		keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")parte1.siguienteaDondeIr("up")colaSnake.siguienteaDondeIr("up")})
+		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")parte1.siguienteaDondeIr("down")colaSnake.siguienteaDondeIr("down")})
+		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")parte1.siguienteaDondeIr("left")colaSnake.siguienteaDondeIr("left")})
+		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")parte1.siguienteaDondeIr("right")colaSnake.siguienteaDondeIr("right")})
+		
+		game.onTick(400, "movimientoDelJugador",{jugador.moverse() parte1.moverse() colaSnake.moverse()})
+	}
+	
+	 method iniciar(){
+		game.cellSize(32)
+		game.height(15)
+		game.width(15)
+		pantallaDeInicio.iniciar()
+	    game.start()
+	    
+	}
+	method reiniciarPartida() {                              
+		game.addVisual("fondoJuego.")
+		self.personaje()
+	}
+	
+	
+}
+

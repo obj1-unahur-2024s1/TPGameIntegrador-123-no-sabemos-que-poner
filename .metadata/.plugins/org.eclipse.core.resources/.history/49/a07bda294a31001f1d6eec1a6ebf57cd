@@ -1,0 +1,12 @@
+im
+port wollok.game.*
+import juego.*
+import player.*
+import items.*
+
+
+program snakes {
+	
+	snake.iniciar()
+	  
+}

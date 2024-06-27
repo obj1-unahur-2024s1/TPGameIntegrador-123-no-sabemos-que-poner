@@ -1,0 +1,38 @@
+import pacientes.*
+
+class Aparato {
+	var property color = "blanco"
+	
+	method usar(persona) {}
+	
+	method puedeSerUsadoPor(persona) = null
+}
+
+class Magneto inherits Aparato{
+	
+	override method usar(persona) {
+		persona.nivelDeDolor(0.max(persona.nivelDeDolor() - (persona.nivelDeDolor() * 0.1)))
+	}
+	
+	override method puedeSerUsadoPor(persona) = true
+}
+
+
+class Bicicleta inherits Aparato {
+	
+	override method usar(persona) {
+		persona.nivelDeDolor(0.max(persona.nivelDeDolor() - 4))
+		persona.nivelDeFortaleza(persona.nivelDeFortaleza() + 3)
+	}
+	
+	override method puedeSerUsadoPor(persona) = persona.edad() > 8
+	
+}
+
+class Minitramp inherits Aparato {
+	override method usar(persona) {
+		persona.nivelDeFortaleza(persona.nivelDeFortaleza() + (persona.edad() * 0.1))
+	}
+	
+	override method puedeSerUsadoPor(persona) = persona.nivelDeDolor() < 20
+}

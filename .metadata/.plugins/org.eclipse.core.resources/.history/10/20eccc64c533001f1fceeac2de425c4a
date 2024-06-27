@@ -1,0 +1,26 @@
+import hogwarts.*
+import hechizos.*
+import estudiantesYcriaturas.*
+
+test "Escenario de prueba" {	
+	const severus = new Profesor(materia = "defensa contra las artes oscuras")
+	const inmobilus = new HechizoComun(nivelDeDificultad = 5)
+	const defensa = new MateriaMagica(hechizo = inmobilus, profesor = severus)
+	const harry = new EstudianteGryffindor(nivelDeHabilidad = 4, salud = 100)
+	const draco = new EstudianteSlytherin(nivelDeHabilidad = 2, salud = 100)
+	const ron = new EstudianteGryffindor(nivelDeHabilidad = 4, salud = 100)
+	const hermionie = new EstudianteGryffindor(nivelDeHabilidad = 10)
+	const lechuza = new CriaturaMagica(salud = 50)
+	
+	defensa.incribirEstudiante(harry)
+	defensa.incribirEstudiante(draco)
+	defensa.incribirEstudiante(hermionie)
+	defensa.hacerPractica(lechuza)
+	
+	assert.that(!inmobilus.puedeRealizarlo(draco))
+	assert.that(inmobilus.puedeRealizarlo(harry))
+	assert.that(inmobilus.puedeRealizarlo(hermionie))
+	
+	assert.that(ron.hechizosAprendidos().isEmpty())
+	assert.that(!inmobilus.puedeRealizarlo(ron))
+}

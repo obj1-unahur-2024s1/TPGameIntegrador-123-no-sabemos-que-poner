@@ -1,0 +1,68 @@
+import hogwarts.*
+import hechizos.*
+import estudiantesYcriaturas.*
+
+
+describe "escenarios de prueba" {
+		const severus = new Profesor(materia = "defensa contra las artes oscuras")
+		const inmobilus = new HechizoComun(nivelDeDificultad = 5)
+		const defensa = new MateriaMagica(hechizo = inmobilus, profesor = severus)
+		const harry = new EstudianteGryffindor(nivelDeHabilidad = 4, salud = 100)
+		const draco = new EstudianteSlytherin(nivelDeHabilidad = 2, salud = 100)
+		const ron = new EstudianteGryffindor(nivelDeHabilidad = 4, salud = 100)
+		const hermionie = new EstudianteGryffindor(nivelDeHabilidad = 10)
+		const lechuza = new CriaturaMagica(salud = 50)
+		
+		
+	test "hechizos comunes" {	
+		harry.asistirAClase(defensa)
+		draco.asistirAClase(defensa)
+		hermionie.asistirAClase(defensa)
+		defensa.hacerPractica(lechuza)
+	
+		assert.that(!inmobilus.puedeRealizarlo(draco))
+		assert.that(inmobilus.puedeRealizarlo(hermionie))
+		assert.that(inmobilus.puedeRealizarlo(harry))
+		assert.that(ron.hechizosAprendidos().isEmpty())
+		assert.that(!inmobilus.puedeRealizarlo(ron))
+	}
+
+	test "hechizos imperdonables" {
+		const avadakadavra = new HechizoImperdonable(nivelDeDano = 50 )
+		const prohibidos = new MateriaMagica(profesor = severus, hechizo = avadakadavra)
+		const george = new EstudianteGryffindor(nivelDeHabilidad = 10, salud = 100)
+		george.asistirAClase(prohibidos)
+		
+		prohibidos.hacerPractica(lechuza)
+		
+		assert.equals(50, george.salud())
+		assert.equals(30, lechuza.salud()) 
+	}
+
+	test "hechizos sin peligro" {
+		const fred = new EstudianteGryffindor(nivelDeHabilidad = 4, salud = 100, sangre = "Sucia")
+		const ridiculus = new HechizoSinPeligro()
+		const lupin = new Profesor()
+		const harmless = new MateriaMagica(hechizo = ridiculus, profesor = lupin)
+		fred.asistirAClase(harmless)
+		
+		harmless.hacerPractica(lechuza)
+		
+		// 4 es el resultado correcto porque aprender el hechizo le suma 1 de experiencia, que es
+		// lo que perdio al realizar el hechizo
+		assert.equals(4, fred.nivelDeHabilidad())
+		assert.equals(40, lechuza.salud())
+	}
+	
+	test "cambiar de casa" {
+		const cambiar = new CambiusSombrerus()
+		const ana = new EstudianteRavenclaw(nivelDeHabilidad = 4, salud = 100, sangre = "pura", puedeLanzarHechizo = true)
+		const cambios = new MateriaMagica(hechizo = cambiar, profesor = severus)
+		ana.asistirAClase(cambios)
+		
+		assert.equals("Ravenclaw", ana.casa())
+		
+		cambios.hacerPractica(lechuza)
+		assert.equals("Gryffindor", ana.casa())
+	}
+}

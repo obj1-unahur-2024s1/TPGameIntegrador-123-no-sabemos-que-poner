@@ -1,0 +1,31 @@
+import wollok.game.*
+import juego.*
+import player.*
+
+const dondeAparecer = []
+
+class ItemEnNivel{
+	var position = game.origin()
+	method reubicar(){
+		dondeAparecer.add(position)
+		position = dondeAparecer.anyOne()
+		dondeAparecer.remove(position)
+	}
+}
+
+class Manzana{
+	var position
+	var property image = "manzana.png"
+	method position() = position
+	method image() = image
+	method comido(){
+		 
+	     lasPartesDeSnake.add(new ParteDeSnake(
+	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
+	     	position = lasPartesDeSnake.last().position()))
+	     	 
+	     game.addVisual(lasPartesDeSnake.last())
+	     game.removeVisual(self)
+	     
+	}
+}

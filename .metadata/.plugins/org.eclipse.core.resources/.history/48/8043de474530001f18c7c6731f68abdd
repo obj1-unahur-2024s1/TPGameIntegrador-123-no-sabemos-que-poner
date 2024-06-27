@@ -1,0 +1,26 @@
+import wollok.game.*
+import juego.*
+import player.*
+
+const dondeAparecer = []
+
+class ItemEnNivel {
+	var property posicion = self.randomEmptyPosition()
+	var property image = ""
+
+	method randomEmptyPosition() {
+	 const position = self.randomPosition()
+	
+		return if (self.positionIsOccupied(position)) {self.randomEmptyPosition()} 
+				else {position}
+	}
+
+	method randomPosition() {
+    	return game.at((1.randomUpTo(game.width() - 1)), (1.randomUpTo(game.height() - 1)))
+	}
+
+
+	method positionIsOccupied(pos) {
+    	return lasPartesDeSnake.any{ parte => parte.position() == pos }
+	}
+}

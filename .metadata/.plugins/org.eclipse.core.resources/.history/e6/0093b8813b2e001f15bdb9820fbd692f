@@ -1,0 +1,134 @@
+import wollok.game.*
+import juego.*
+import items.*
+
+const lasPartesDeSnake = []
+
+class ParteDeSnake {
+	var property aDondeIr = "right"
+	var property siguienteaDondeIr = "right"
+	var property nroDeParte = 0
+	var property position = game.center()
+	var property image = "cabeza.png" //importa que sea una propiedad para que se abra el programa
+	method conseguirSiguienteaDondeIr(){
+		siguienteaDondeIr = (lasPartesDeSnake.find(
+			{p => p.nroDeParte() +1 == self.nroDeParte()}
+		).aDondeIr())
+	}
+	method siguienteaDondeIr(direccion){
+		siguienteaDondeIr = direccion
+	}
+	
+	method siguienteaDondeIr(){
+		return siguienteaDondeIr
+	}
+	
+	
+	method moverse(){
+		self.conseguirSiguienteaDondeIr()
+		if (aDondeIr == "left"){
+			position = position.left(1)
+		} if (aDondeIr == "up"){
+			position = position.up(1)
+		} if (aDondeIr == "right"){
+			position = position.right(1)
+		} if (aDondeIr == "down"){
+			position = position.down(1)
+		}
+		aDondeIr = siguienteaDondeIr
+		
+	}
+	
+}
+
+class CabezaDeSnake inherits ParteDeSnake {
+	override method conseguirSiguienteaDondeIr(){
+		keyboard.up().onPressDo(siguienteaDondeIr = "up")
+		keyboard.down().onPressDo(siguienteaDondeIr = "down")
+		keyboard.left().onPressDo(siguienteaDondeIr = "left")
+		keyboard.right().onPressDo(siguienteaDondeIr = "right")
+	}
+	override method moverse(){
+		if (aDondeIr == "left"){
+			position = position.left(1)
+		} if (aDondeIr == "up"){
+			position = position.up(1)
+		} if (aDondeIr == "right"){
+			position = position.right(1)
+		} if (aDondeIr == "down"){
+			position = position.down(1)
+		}
+		aDondeIr = siguienteaDondeIr
+	}
+}
+
+object pantallaDeInicio {
+	var property position = game.center()
+	var property image = "fondoInicio.jpg"
+		
+	method iniciar() {
+		game.addVisual(self)
+		keyboard.enter().onPressDo({game.removeVisual(self)})
+		game.whenKeyPressedDo(keyboard.enter(), {self.personaje()})
+	}
+}
+
+/*object jugador {
+	
+	var position = game.at(1,1)
+	
+	
+	
+	method position() = position
+	method position(posicion){
+		position = posicion
+		
+	}
+	method image() = "cabeza.png"
+
+	
+	
+	method moveArriba(){ 
+		if (position.y()<14){
+		self.position(position.up(1))
+	}
+		
+	}
+		
+	method moveAbajo(){ 
+		if (position.y()>0){
+			self.position(position.down(1))
+		}
+		
+	}
+		
+	method moveIzquierda(){ 
+		if (position.x()>0){
+			self.position(position.left(1))
+		}
+		
+	}
+		
+	method moveDerecha(){ 
+		if (position.x()<14){
+			self.position(position.right(1))
+		}
+		
+		
+	}
+		
+	
+}*/
+/*class Cuerpo{
+	
+	var position = 0
+	
+	
+	
+	method image() = "cuerpo.png"
+	method position() = position
+	method position(posicion){
+		position = posicion
+	}
+	
+}*/

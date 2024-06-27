@@ -1,0 +1,27 @@
+import estudiantesYcriaturas.*
+
+object hogwarts {
+	const estudiantes = []
+	
+}
+
+object profesor {
+	var property materia = ""
+	
+}
+
+class MateriaMagica {
+	var property materia = ""
+	var property profesor = null
+	var hechizo = null
+	const estudiantesPresentes = []
+	
+	method asignarHechizo(embrujo) {hechizo = embrujo}
+	
+	method Actual() = hechizo
+	
+	method hacerPractica(criatura) = estudiantesPresentes.filter({estudiante => hechizo.puedeRealizarlo(estudiante)})
+														 .forEach({estudiante => estudiante.lanzarHechizo(hechizo)
+		                         					     criatura.recibirHechizo(hechizo)})
+	
+}

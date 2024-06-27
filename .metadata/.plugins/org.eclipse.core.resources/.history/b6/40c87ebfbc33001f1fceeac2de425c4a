@@ -1,0 +1,17 @@
+class Hogwarts {
+	const estudiantes = []
+	
+}
+
+class Profesor {
+	var property materia = ""
+	
+}
+
+class MateriaMagica {
+	var hechizo = ""
+	
+	method asignarMateria(materia) {hechizo = materia}
+	
+	method materiaActual() = hechizo
+}

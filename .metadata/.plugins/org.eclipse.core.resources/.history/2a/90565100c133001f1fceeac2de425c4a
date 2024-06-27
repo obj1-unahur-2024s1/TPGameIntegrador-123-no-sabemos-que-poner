@@ -1,0 +1,63 @@
+import hogwarts.*
+import estudiantesYcriaturas.*
+
+class Hechizo {
+	var property nivelDeDificultad = 0
+	method puedeRealizarlo(estudiante) {return
+		throw new Exception(message = "no cumple los requerimientos para realizar este hechizo")
+	} 
+	
+	method consecuencias(ser) {}
+}
+
+class HechizoComun inherits Hechizo {
+	override method puedeRealizarlo(estudiante) {
+		return if (estudiante.hechizos().contains(self) and estudiante.nivelDeHabilidad() > 3)
+		 true else super(estudiante)
+	}
+	
+	override method consecuencias(ser) {
+		if (!ser.puedeLanzarHechizo()) {ser.salud(0.max(ser.salud() - (10 + nivelDeDificultad)))}
+		else {}
+	}
+}
+
+class HechizoImperdonable inherits Hechizo {
+	var property nivelDeDano = 0
+	
+	override method puedeRealizarlo(estudiante) {
+		return if (estudiante.nivelDeHabilidad() > 7) {true} else super(estudiante)
+	}
+	
+	override method consecuencias(ser) {
+		if (!ser.puedeLanzarHechizo() and !ser.esInmune()) ser.salud(0.max(ser.salud() - 20)) else {}
+		if (ser.puedeLanzarHechizo()) ser.salud(0.max(ser.salud() - nivelDeDano))
+	}
+}
+
+class HechizoSinPleigro inherits Hechizo {
+	override method puedeRealizarlo(estudiante) {
+		return if (!estudiante.esPeligroso()) {true} else super(estudiante)
+	}
+	
+	override method consecuencias(ser) {
+		if (ser.puedeLanzarHechizos()) ser.nivelDeHabilidad(0.max(ser.nivelDeHabilidad() - 1))
+		if (!ser.puedeLanzarHechizo() and !ser.esInmune()) ser.salud(0.max(ser.salud() - (10 + nivelDeDificultad))) else {}
+	}
+}
+
+class CambiusSombrerus inherits Hechizo {
+	override method puedeRealizarlo(estudiante) {
+		return if (estudiante.sangre() == "pura") {true} else super(estudiante)
+	}
+	
+	override method consecuencias(ser) {
+		const casas = ["Gryffindor", "Slytherin", "Hufflepuff", "Ravenclaw"]
+		
+		if (ser.puedeLanzarHechizo()) ser.casa() {
+			ser.casa(casas.first())
+			casas.add(casas.first())
+			casas.remove(casas.first())
+		} else {}
+	}
+}

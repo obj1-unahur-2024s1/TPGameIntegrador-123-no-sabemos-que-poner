@@ -1,0 +1,46 @@
+import wollok.game.*
+import juego.*
+import player.*
+
+const dondeAparecer = []
+
+class ItemEnNivel{
+	var position = game.origin()
+	method reubicar(){
+		dondeAparecer.add(position)
+		position = dondeAparecer.anyOne()
+		dondeAparecer.remove(position)
+	}
+}
+
+class Manzana{
+	var property posicion = self.posicionAlAzarVacia()
+	var property image = "manzana.png"
+
+	method posicionAlAzarVacia() {
+	 const position = self.posicionRandom()
+	
+		return if (self.estaOcupadaLaPosicion(position)) {self.posicionAlAzarVacia()} 
+				else {position}
+	}
+
+	method posicionRandom() {
+    	return game.at((1.randomUpTo(game.width() - 1)), (1.randomUpTo(game.height() - 1)))
+	}
+
+
+	method estaOcupadaLaPosicion(pos) {
+    	return lasPartesDeSnake.any{ parte => parte.position() == pos }
+	}
+	
+	method comido(){
+		 
+	     lasPartesDeSnake.add(new ParteDeSnake(
+	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
+	     	position = lasPartesDeSnake.last().position()))
+	     	 
+	     game.addVisual(lasPartesDeSnake.last())
+	     game.removeVisual(self)
+	     
+	}
+}

@@ -1,0 +1,26 @@
+import estudiantesYcriaturas.*
+
+class Profesor {
+	var property materia = ""
+}
+
+class MateriaMagica {
+	var property materia = ""
+	var property profesor = null
+	var hechizo = null
+	const estudiantesLista = []
+	
+	method incribirEstudiante(estudiante) = estudiantesLista.add(estudiante)
+	
+	method cancelarInscripcion(estudiante) = estudiantesLista.remove(estudiante)
+	
+	method asignarHechizo(embrujo) {hechizo = embrujo}
+	
+	method Actual() = hechizo
+	
+	method cambiarHechizoActual(embrujo) {hechizo = embrujo}
+	
+	method hacerPractica(criatura) = estudiantesLista.forEach({estudiante => estudiante.lanzarHechizo(hechizo)
+		                         					     criatura.recibirHechizo(hechizo)})
+	
+}

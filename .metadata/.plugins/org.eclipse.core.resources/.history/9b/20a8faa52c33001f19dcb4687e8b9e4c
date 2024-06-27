@@ -1,0 +1,22 @@
+class CentroKinesiologia {}
+
+class Paciente {
+	var property edad = 0
+	var property nivelDeFortaleza = 0
+	var property nivelDeDolor = 0
+	const rutina = []
+	
+	method asignarRutina(sesion) = rutina.addAll(sesion)
+	
+	method puedeRealizarLaRutina() = rutina.all({aparato => aparato.puedeSerUsadoPor(self)})
+	
+	method realizarRutina() {rutina.forEach({aparato => aparato.usar(self)})}
+}
+
+class PacienteResistente inherits Paciente {
+	
+	override method realizarRutina() {
+		super()
+		self.nivelDeFortaleza(self.nivelDeFortaleza() + rutina.sum({rutina.map({aparato => rutina.ocurrentOf(aparato)})}))
+	}
+}
