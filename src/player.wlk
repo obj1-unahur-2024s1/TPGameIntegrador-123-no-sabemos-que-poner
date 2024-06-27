@@ -82,6 +82,7 @@ class Manzana{
 }
 
 //
+
 /*object jugador {
 	
 	var position = game.at(1,1)
