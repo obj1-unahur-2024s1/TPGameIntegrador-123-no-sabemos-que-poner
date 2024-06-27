@@ -81,8 +81,11 @@ class Manzana{
 	}
 }
 
+<<<<<<< HEAD
 //
 
+=======
+>>>>>>> parent of bad3cd5 (movimiento commit)
 /*object jugador {
 	
 	var position = game.at(1,1)
