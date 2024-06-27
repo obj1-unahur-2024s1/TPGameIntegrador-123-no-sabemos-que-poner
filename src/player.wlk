@@ -5,20 +5,25 @@ import items.*
 const lasPartesDeSnake = []
 
 class ParteDeSnake {
+	var property jugadorV = null
 	var property aDondeIr = null
 	var property siguienteaDondeIr = null
+	var property lado = aDondeIr
 	var property nroDeParte = 0
 	var property position = game.center()
 	var property image = "cuerpoArAb.png" //importa que sea una propiedad para que se abra el programa
 	
 	method siguienteaDondeIr() = siguienteaDondeIr
+	
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (lasPartesDeSnake.find(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
 		).aDondeIr())
 	}
+	
 	method moverse(){
-		aDondeIr = siguienteaDondeIr
+		if (jugadorV.seMovio()) {
+	     aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
 			image = "cuerpoIzqDer.png"
@@ -33,110 +38,124 @@ class ParteDeSnake {
 			image = "cuerpoArAb.png"
 		}
 		self.conseguirSiguienteaDondeIr()
+		} else {
+			position = self.seguirHaciaDondeIba(siguienteaDondeIr)
+			image = self.animacionHacia(siguienteaDondeIr)
+		}
 	}	
+		
 	
-	method comido(){}
+	method seguirHaciaDondeIba(dir) =
+		if (dir == "left"){
+			position.left(1)
+		} else if (dir == "up"){
+			position.up(1)
+		} else if (dir == "right"){
+			position.right(1)
+		} else position.down(1)
+		
+		
+	method animacionHacia(dir) = 
+		if (dir == "right" or dir == "left") "cuerpoIzqDer.png"
+		else "cuerpoArAb.png"
+	
+	method comido(v){}
 }
 
 class CabezaDeSnake inherits ParteDeSnake {
-	override method image() = image
+	var property puntos = 0
+	const puntuaciones = []
+	var property seMovio = null
 	
+	override method image() = image
+		
 	override method conseguirSiguienteaDondeIr(){
 		keyboard.up().onPressDo(siguienteaDondeIr = "up")
 		keyboard.down().onPressDo(siguienteaDondeIr = "down")
 		keyboard.left().onPressDo(siguienteaDondeIr = "left")
 		keyboard.right().onPressDo(siguienteaDondeIr = "right")
 	}
+	
+	
 	override method moverse(){
 		aDondeIr = siguienteaDondeIr
-		if (aDondeIr == "left"){
+		if (lado != "right" and aDondeIr == "left"){
 			position = position.left(1)
+			self.seMovio(true)
 			image = "cabezaIzquierda.png"
-		} if (aDondeIr == "up"){
+			lado = aDondeIr
+		} else if (lado != "down" and aDondeIr == "up"){
 			position = position.up(1)
+			self.seMovio(true)
 			image = "cabezaArriba.png"
-		} if (aDondeIr == "right"){
+			lado = aDondeIr
+		} else if (lado != "left" and aDondeIr == "right"){
 			position = position.right(1)
+			self.seMovio(true)
 			image = "cabezaDerecha.png"
-		} if (aDondeIr == "down"){
+			lado = aDondeIr
+		} else if (lado != "up" and aDondeIr == "down"){
 			position = position.down(1)
+			self.seMovio(true)
 			image = "cabezaAbajo.png"
+			lado = aDondeIr
+		} else {
+			self.seMovio(false)
+			position = self.seguirHaciaDondeIba(lado)
+			image = self.animacionHacia(lado)
 		}
 	}
+	
+	override method seguirHaciaDondeIba(dir) =
+		if (dir == "left"){
+			position.left(1)
+		} else if (dir == "up"){
+			position.up(1)
+		} else if (dir == "right"){
+			position.right(1)
+		} else position.down(1)
+		
+	override method animacionHacia(dir) = 
+		if (dir == "right") "cabezaDerecha.png"
+		else if (dir == "left") "cabezaIzquierda.png"
+		else if (dir == "down") "cabezaAbajo.png"
+		else "cabezaArriba.png"
+	
+	method morir() {
+		puntuaciones.add(puntos)
+		game.stop()
+		game.addVisualIn("pantallaMuerte.", game.center())
+		textoPuntos.asignarPuntaje(self.mejorPuntuacion())
+		keyboard.enter().onPressDo({
+			puntos = 0
+			snake.reiniciarPartida()
+		})
+	}
+	
+	method mejorPuntuacion() = if (puntuaciones.isEmpty()) 0 else 
+							   if (puntuaciones.max() < puntos) puntos else
+							       puntuaciones.max()
 }
-class Manzana{
-	var position
-	var image = "manzana.png"
-	method position() = position
-	method image() = image
-	method comido(){
-		 
-	     lasPartesDeSnake.add(new ParteDeSnake(
-	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
-	     	position = lasPartesDeSnake.last().position()))
-	     	 
-	     game.addVisual(lasPartesDeSnake.last())
-	     game.removeVisual(self)
-	     
+
+object pantallaDeInicio {
+	var property position = game.at(0, 0)
+	var property image = "fondoInicio.jpg"
+		
+	method iniciar() {
+		game.addVisual(self)
+		keyboard.enter().onPressDo({
+			game.removeVisual(self)
+			//game.addVisualIn("fondoJuego.", game.center())
+			snake.personaje()	
+		})
 	}
 }
 
-/*object jugador {
+object textoPuntos {
+	var cantidadPuntaje = 0
 	
-	var position = game.at(1,1)
-	
-	
-	
-	method position() = position
-	method position(posicion){
-		position = posicion
-		
-	}
-	method image() = "cabeza.png"
-
-	
-	
-	method moveArriba(){ 
-		if (position.y()<14){
-		self.position(position.up(1))
-	}
-		
-	}
-		
-	method moveAbajo(){ 
-		if (position.y()>0){
-			self.position(position.down(1))
-		}
-		
-	}
-		
-	method moveIzquierda(){ 
-		if (position.x()>0){
-			self.position(position.left(1))
-		}
-		
-	}
-		
-	method moveDerecha(){ 
-		if (position.x()<14){
-			self.position(position.right(1))
-		}
-		
-		
-	}
-		
-	
-}*/
-/*class Cuerpo{
-	
-	var position = 0
-	
-	
-	
-	method image() = "cuerpo.png"
-	method position() = position
-	method position(posicion){
-		position = posicion
-	}
-	
-}*/
+	method asignarPuntaje(numero) {cantidadPuntaje = numero}
+	method text() = "maxima puntuacion" + cantidadPuntaje 
+	method position() = game.at(game.width()/2, game.height() - 3)
+	//method textColor() = "FF0000FF" probar colores
+}

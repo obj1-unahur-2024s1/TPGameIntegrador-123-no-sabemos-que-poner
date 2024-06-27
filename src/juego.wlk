@@ -1,34 +1,33 @@
 import wollok.game.*
 import player.*
+import items.*
 
 object snake{
 	
  method iniciar(){
-		game.cellSize(72)
-		game.height(14)
-		game.width(18)
-		self.personaje()
+		game.cellSize(32)
+		game.height(20)
+		game.width(15)
+		pantallaDeInicio.iniciar()
 	    game.start()
-	    
 	}
+	
     method personaje(){
-		const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
-		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
-		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
-		const man1 = new Manzana(position = game.at(10,10))
-		const man2 = new Manzana(position = game.at(5,10))
+		const jugador = new CabezaDeSnake(position = game.at(2,5), siguienteaDondeIr = "right", seMovio = true)
+		const parte1 = new ParteDeSnake(position = game.at(1,5), nroDeParte = 1, siguienteaDondeIr = "right", jugadorV = jugador)
+		const parte2 = new ParteDeSnake(position = game.at(0,5), nroDeParte = 2, siguienteaDondeIr = "right", jugadorV = jugador)
+		const man = new Manzana()
+		
 		game.addVisual(jugador)
 		game.addVisual(parte1)
 		game.addVisual(parte2)
-		game.addVisual(man1)
-		game.addVisual(man2)
+		game.addVisual(man)
 		
 		
 		lasPartesDeSnake.add(jugador)
 		lasPartesDeSnake.add(parte1)
 		lasPartesDeSnake.add(parte2)
-		game.onCollideDo(jugador,{a => a.comido()})
-		
+		game.onCollideDo(jugador, {a => a.comido(jugador)})
 		
 		
 		keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
@@ -36,7 +35,12 @@ object snake{
 		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
 		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})
 		
-		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
+		game.onTick(200, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
+	}
+	
+	method reiniciarPartida() {                              
+		game.addVisual("fondoJuego.jpg")
+		self.personaje()
 	}
 }
 

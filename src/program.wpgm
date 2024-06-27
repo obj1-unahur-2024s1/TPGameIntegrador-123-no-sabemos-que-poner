@@ -7,6 +7,5 @@ import items.*
 program snakes {
 	
 	snake.iniciar()
-	
-	    
+	  
 }
