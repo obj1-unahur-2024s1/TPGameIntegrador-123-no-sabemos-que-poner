@@ -12,6 +12,8 @@ class ParteDeSnake {
 	var property image = "cuerpoArAb.png" //importa que sea una propiedad para que se abra el programa
 	
 	method siguienteaDondeIr() = siguienteaDondeIr
+	method aDondeIr() = aDondeIr
+	
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (lasPartesDeSnake.find(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
@@ -42,10 +44,10 @@ class CabezaDeSnake inherits ParteDeSnake {
 	override method image() = image
 	
 	override method conseguirSiguienteaDondeIr(){
-		keyboard.up().onPressDo(siguienteaDondeIr = "up")
-		keyboard.down().onPressDo(siguienteaDondeIr = "down")
-		keyboard.left().onPressDo(siguienteaDondeIr = "left")
-		keyboard.right().onPressDo(siguienteaDondeIr = "right")
+		//keyboard.up().onPressDo(if (aDondeIr == "down") siguienteaDondeIr = "up" else siguienteaDondeIr)
+		//keyboard.down().onPressDo(if (aDondeIr == "up") siguienteaDondeIr = "down" else siguienteaDondeIr)
+		//keyboard.left().onPressDo(if (aDondeIr == "right") siguienteaDondeIr = "left" else siguienteaDondeIr)
+		//keyboard.right().onPressDo(if (aDondeIr == "left") siguienteaDondeIr = "right" else siguienteaDondeIr)
 	}
 	override method moverse(){
 		aDondeIr = siguienteaDondeIr

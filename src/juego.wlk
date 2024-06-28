@@ -29,14 +29,18 @@ object snake{
 		lasPartesDeSnake.add(parte2)
 		game.onCollideDo(jugador,{a => a.comido()})
 		
+		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
 		
-		
-		keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
+		keyboard.up().onPressDo({if (not (jugador.siguienteaDondeIr() == "down")) jugador.siguienteaDondeIr("up") else jugador.siguienteaDondeIr()})
+		keyboard.down().onPressDo({if (not (jugador.siguienteaDondeIr() == "up")) jugador.siguienteaDondeIr("down") else jugador.siguienteaDondeIr()})
+		keyboard.left().onPressDo({if (not (jugador.siguienteaDondeIr() == "right")) jugador.siguienteaDondeIr("left") else jugador.siguienteaDondeIr()})
+		keyboard.right().onPressDo({if (not (jugador.siguienteaDondeIr() == "left")) jugador.siguienteaDondeIr("right") else jugador.siguienteaDondeIr()})
+		/*keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
 		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")})
 		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
-		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})
+		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})*/
 		
-		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
+		
 	}
 }
 
