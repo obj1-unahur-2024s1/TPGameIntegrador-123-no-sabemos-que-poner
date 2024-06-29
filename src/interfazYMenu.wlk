@@ -9,5 +9,5 @@ class Puntaje {
 	method cambiarTexto(nuevo){
 		quePoner = nuevo.toString()
 	}
-	method comer(ponerjuegoaqui){}
+	method comer(/*ponerjuegoaqui*/){}
 }

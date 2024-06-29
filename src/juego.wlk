@@ -5,7 +5,7 @@ import interfazYMenu.*
 
 object snake{
 	var property puntos = 0
-	const puntaje = new Puntaje(quePoner = puntos, position = game.at(17,13))
+	const puntaje = new Puntaje(quePoner = puntos, position = game.at(1,1))
 	
 	
     method juego(){
@@ -47,12 +47,14 @@ object snake{
 		lasPartesDeSnake.add(parte1)
 		lasPartesDeSnake.add(parte2)
 		
-		game.onCollideDo(jugador,{a => a.comer(self)})
+		
+		game.onCollideDo(jugador,{a => a.comer(/*ponerjuegoaqui*/)})
 		
 		keyboard.up().onPressDo({if (not (jugador.siguienteaDondeIr() == "down")) jugador.siguienteaDondeIr("up") else jugador.siguienteaDondeIr()})
 		keyboard.down().onPressDo({if (not (jugador.siguienteaDondeIr() == "up")) jugador.siguienteaDondeIr("down") else jugador.siguienteaDondeIr()})
 		keyboard.left().onPressDo({if (not (jugador.siguienteaDondeIr() == "right")) jugador.siguienteaDondeIr("left") else jugador.siguienteaDondeIr()})
 		keyboard.right().onPressDo({if (not (jugador.siguienteaDondeIr() == "left")) jugador.siguienteaDondeIr("right") else jugador.siguienteaDondeIr()})
+
 		
 		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
 		
@@ -66,6 +68,8 @@ object snake{
     	//items
 		const manzana = new Manzana(position = game.at(10,10))
 		game.addVisual(manzana)
+		keyboard.c().onPressDo({manzana.sacarViablesOcup()})
+		
     }
 }
 
