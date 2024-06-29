@@ -47,7 +47,7 @@ object snake{
 		lasPartesDeSnake.add(parte1)
 		lasPartesDeSnake.add(parte2)
 		
-		game.onCollideDo(jugador,{a => a.comido()})
+		game.onCollideDo(jugador,{a => a.comer(self)})
 		
 		keyboard.up().onPressDo({if (not (jugador.siguienteaDondeIr() == "down")) jugador.siguienteaDondeIr("up") else jugador.siguienteaDondeIr()})
 		keyboard.down().onPressDo({if (not (jugador.siguienteaDondeIr() == "up")) jugador.siguienteaDondeIr("down") else jugador.siguienteaDondeIr()})

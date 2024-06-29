@@ -35,9 +35,20 @@ class ParteDeSnake {
 			image = "cuerpoArAb.png"
 		}
 		self.conseguirSiguienteaDondeIr()
+	}
+	
+	method crecer(){
+		lasPartesDeSnake.add(new ParteDeSnake(
+	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
+	     	position = lasPartesDeSnake.last().position()))
+	     	 
+	     game.addVisual(lasPartesDeSnake.last())
 	}	
 	
-	method comido(){}
+	method comer(ponerjuegoaqui){
+		ponerjuegoaqui.terminarJuego()
+	}
+	
 }
 
 class CabezaDeSnake inherits ParteDeSnake {
