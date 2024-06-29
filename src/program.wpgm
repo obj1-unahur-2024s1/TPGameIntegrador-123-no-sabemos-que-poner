@@ -2,11 +2,14 @@ import wollok.game.*
 import juego.*
 import player.*
 import items.*
+import interfazYMenu.*
 
 
 program snakes {
+	game.cellSize(72)
+	game.height(12)
+	game.width(16)
 	
-	snake.iniciar()
+	snake.juego()
 	
-	    
 }

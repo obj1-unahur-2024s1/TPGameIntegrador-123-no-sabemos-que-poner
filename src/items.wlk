@@ -2,13 +2,22 @@ import wollok.game.*
 import juego.*
 import player.*
 
-const dondeAparecer = []
 
 class ItemEnNivel{
-	var position = game.origin()
+	var property position 
 	method reubicar(){
-		dondeAparecer.add(position)
-		position = dondeAparecer.anyOne()
-		dondeAparecer.remove(position)
+		const nuevox = 0.randomUpTo(game.width())
+		const nuevoy = 0.randomUpTo(game.height())
+		position = game.at(nuevox,nuevoy)
+	}
+}
+
+class Manzana inherits ItemEnNivel{
+	var property image = "manzana.png"
+	
+	method comer(ponerjuegoaqui){
+		lasPartesDeSnake.last().crecer()
+		self.reubicar()
+		ponerjuegoaqui.sumarPuntos()
 	}
 }
