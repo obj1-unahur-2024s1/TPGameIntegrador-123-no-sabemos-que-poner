@@ -66,19 +66,3 @@ class CabezaDeSnake inherits ParteDeSnake {
 		}
 	}
 }
-class Manzana{
-	var position
-	var image = "manzana.png"
-	method position() = position
-	method image() = image
-	method comido(){
-		 
-	     lasPartesDeSnake.add(new ParteDeSnake(
-	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
-	     	position = lasPartesDeSnake.last().position()))
-	     	 
-	     game.addVisual(lasPartesDeSnake.last())
-	     game.removeVisual(self)
-	     
-	}
-}

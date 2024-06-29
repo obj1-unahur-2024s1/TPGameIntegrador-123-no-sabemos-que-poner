@@ -5,7 +5,7 @@ import interfazYMenu.*
 
 object snake{
 	var property puntos = 0
-	const puntaje = new Puntaje(quePoner = puntos)
+	const puntaje = new Puntaje(quePoner = puntos, position = game.at(17,13))
 	
 	
     method juego(){
@@ -47,7 +47,7 @@ object snake{
 		lasPartesDeSnake.add(parte1)
 		lasPartesDeSnake.add(parte2)
 		
-		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
+		game.onCollideDo(jugador,{a => a.comido()})
 		
 		keyboard.up().onPressDo({if (not (jugador.siguienteaDondeIr() == "down")) jugador.siguienteaDondeIr("up") else jugador.siguienteaDondeIr()})
 		keyboard.down().onPressDo({if (not (jugador.siguienteaDondeIr() == "up")) jugador.siguienteaDondeIr("down") else jugador.siguienteaDondeIr()})
@@ -56,13 +56,10 @@ object snake{
 		
 		game.onTick(300, "movimientoDelJugador",{lasPartesDeSnake.forEach({a => a.moverse()})})
 		
-		game.onCollideDo(jugador,{a => a.comer(self)})
-		
 		/*keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
 		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")})
 		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
 		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})*/
-		
 		
 	}
     method items(){

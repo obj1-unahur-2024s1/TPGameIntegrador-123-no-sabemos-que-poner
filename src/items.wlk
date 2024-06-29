@@ -13,11 +13,16 @@ class ItemEnNivel{
 }
 
 class Manzana inherits ItemEnNivel{
-	var property image = "manzana.png"
-	
-	method comer(ponerjuegoaqui){
-		lasPartesDeSnake.last().crecer()
-		self.reubicar()
-		ponerjuegoaqui.sumarPuntos()
+	var image = "manzana.png"
+	method image() = image
+	method comido(){
+		 
+	     lasPartesDeSnake.add(new ParteDeSnake(
+	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
+	     	position = lasPartesDeSnake.last().position()))
+	     	 
+	     game.addVisual(lasPartesDeSnake.last())
+	     game.removeVisual(self)
+	     
 	}
 }
