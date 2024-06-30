@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import items.*
+import interfazYMenu.*
 
 const lasPartesDeSnake = []
 
@@ -19,6 +20,7 @@ class ParteDeSnake {
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
 		).aDondeIr())
 	}
+	
 	method moverse(){
 		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
@@ -45,7 +47,7 @@ class ParteDeSnake {
 	     game.addVisual(lasPartesDeSnake.last())
 	}	
 	
-	method comer(/*ponerjuegoaqui*/){
+	method colisionar(/*ponerjuegoaqui*/){
 		//ponerjuegoaqui.terminarJuego()
 	}
 
@@ -60,8 +62,12 @@ class CabezaDeSnake inherits ParteDeSnake {
 		keyboard.left().onPressDo(if (aDondeIr == "right") siguienteaDondeIr = "left" else siguienteaDondeIr)
 		keyboard.right().onPressDo(if (aDondeIr == "left") siguienteaDondeIr = "right" else siguienteaDondeIr)
 */	}
+
 	override method moverse(){
 		aDondeIr = siguienteaDondeIr
+		if (position.y() == 0 or position.y() == 12 or position.x() == 0 or position.x() == 16) 
+			{self.morir()} 
+			else {
 		if (aDondeIr == "left"){
 			position = position.left(1)
 			image = "cabezaIzquierda.png"
@@ -74,6 +80,14 @@ class CabezaDeSnake inherits ParteDeSnake {
 		} if (aDondeIr == "down"){
 			position = position.down(1)
 			image = "cabezaAbajo.png"
+		}}
 		}
-	}
+		
+		method morir() {
+			snake.pantallaDeMuerte()
+		}
+		
+		override method colisionar() {
+			snake.pantallaDeMuerte()
+		}
 }
