@@ -109,6 +109,6 @@ object gameOver {
 }
 
 object fondoNivel {
-	var property image = "fondoNivelVioleta.JPEG"
+	var property image = "FondoTablero.png"
 	var property position = game.at(0, 0)
 }
