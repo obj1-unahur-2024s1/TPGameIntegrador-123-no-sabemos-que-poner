@@ -1,10 +1,12 @@
-# Nombre del juego (<- borrar y completar)
+# Snake
 
 ## Equipo de desarrollo
 
-- Alguien
-- Persona
-- etc.
+- Ramiro Castro
+- Jonas Gonzales 
+- Agustina Esjaita
+- persona
+- etc
 
 ## Capturas
 
@@ -17,6 +19,6 @@
 
 ## Otros
 
-- Curso/Facultad
-- Versión de wollok
-- Una vez terminado, no tenemos problemas en que el repositorio sea público / queremos manternerlo privado
+- Tecnicatura en Programación de Videojuegos - UNAHUR 
+- Versión de wollok: 
+- Una vez terminado, no tenemos problemas en que el repositorio sea público
