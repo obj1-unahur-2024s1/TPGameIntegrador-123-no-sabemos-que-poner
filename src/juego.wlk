@@ -9,19 +9,20 @@ object snake{
 	var item = null
 	
     method juego(){
-		pantallaDeInicio.iniciar()
+		pantallaDeInicio.iniciar(1)
 	    game.start()
 	    	    	    
 	}
 	
 	method sumarPuntos(){
-		puntos += 1 //funciona
+		puntos += 100 //funciona
 		puntaje.cambiarTexto(puntos)
 	}
 	
 	method terminarJuego(){
 		game.stop()
 	}
+	method puntos() = puntos
 	
     method personaje(){
     	// el jugador
@@ -66,25 +67,29 @@ object snake{
 		
     }
     
-    method pantallaDeMuerte() {
-    	game.removeTickEvent("movimientoDelJugador")
-    	game.removeVisual(puntaje)
+    method pantallaDeMuerte(a) {
+    	var on = a
+    	
 		game.addVisual(gameOver) 
 		puntaje.position(game.at(10, 6))
-		game.addVisual(puntaje)
+		lasPartesDeSnake.forEach({cuerpo => game.removeVisual(cuerpo)})
+		game.removeTickEvent("movimientoDelJugador")
 		
 		keyboard.space().onPressDo({
-			game.removeVisual(gameOver)
-			lasPartesDeSnake.forEach({cuerpo => game.removeVisual(cuerpo)})
-			game.removeVisual(item)
-			game.removeVisual(puntaje)
-			puntaje.position(game.at(15, 11))
-			puntos = 0
-			puntaje.quePoner(puntos)
-			item = null
-			lasPartesDeSnake.clear()
-			game.removeVisual(fondoNivel)                           
-			pantallaDeInicio.iniciar()			
+			if (on == 1){
+			    game.removeVisual(gameOver)
+			    game.removeVisual(item)
+			    game.removeVisual(puntaje)
+			    puntaje.position(game.at(15, 11))
+			    puntos = 0
+			    puntaje.quePoner(puntos)
+			    item = null
+			    lasPartesDeSnake.clear()
+			    game.removeVisual(fondoNivel)                           
+			    pantallaDeInicio.iniciar(1)		
+			    on -= 1
+			} 
+				
 		})
 	}
 }
@@ -93,12 +98,16 @@ object pantallaDeInicio {
 	var property position = game.at(0, 0)
 	var property image = "fondoVioleta.jpg"
 		
-	method iniciar() {
+	method iniciar(a) {
+		var on = a
 		game.addVisual(self)
 		keyboard.q().onPressDo({snake.terminarJuego()})
 		keyboard.enter().onPressDo({
-			game.removeVisual(self)
-			snake.personaje()	
+			 if (on == 1){
+			 	snake.personaje()
+			    game.removeVisual(self)
+			 	on -= 1
+			 }
 		})
 	}
 }

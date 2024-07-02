@@ -45,11 +45,12 @@ class ParteDeSnake {
 	     	position = lasPartesDeSnake.last().position()))
 	     	 
 	     game.addVisual(lasPartesDeSnake.last())
-	}	
-	
-	method colisionar(/*ponerjuegoaqui*/){
-		//ponerjuegoaqui.terminarJuego()
 	}
+	method colisionar() {
+		    game.removeVisual(self)
+			
+			
+		}	
 
 }
 
@@ -66,7 +67,7 @@ class CabezaDeSnake inherits ParteDeSnake {
 	override method moverse(){
 		aDondeIr = siguienteaDondeIr
 		if (position.y() == 0 or position.y() == 12 or position.x() == 0 or position.x() == 16) 
-			{self.morir()} 
+			{self.colisionar()} 
 			else {
 		if (aDondeIr == "left"){
 			position = position.left(1)
@@ -84,10 +85,14 @@ class CabezaDeSnake inherits ParteDeSnake {
 		}
 		
 		method morir() {
-			snake.pantallaDeMuerte()
+			
+			
+			
 		}
 		
-		override method colisionar() {
-			snake.pantallaDeMuerte()
-		}
+	override method colisionar(){
+	
+		    snake.pantallaDeMuerte(1)	
+			
+	}
 }

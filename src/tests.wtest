@@ -1,7 +1,30 @@
 import player.*
+import items.*
+import juego.*
+import player.*
+import interfazYMenu.*
+import wollok.game.*
 
-test "testX" {
+const lasPartesDeSnake = []
+const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
 
-	assert.that(true)
+
+test "test de verificacion de funcionamiento de agregar puntos" {
+	snake.sumarPuntos()
+	snake.sumarPuntos()
+	snake.sumarPuntos()
+	
+
+	assert.equals(300, snake.puntos())
 
 }
+test "test de verificacion de crecimiento"{
+	lasPartesDeSnake.add(jugador)
+	jugador.crecer()
+	jugador.crecer()
+	jugador.crecer()
+	
+	assert.equals(4, lasPartesDeSnake.size())
+	
+}
+
