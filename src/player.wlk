@@ -47,7 +47,7 @@ class ParteDeSnake {
 	     game.addVisual(lasPartesDeSnake.last())
 	}
 	method colisionar() {
-		    game.removeVisual(self)
+		    snake.pantallaDeMuerte(1)	
 			
 			
 		}	

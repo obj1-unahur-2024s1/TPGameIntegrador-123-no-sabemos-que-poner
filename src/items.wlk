@@ -49,10 +49,21 @@ class Manzana inherits ItemEnNivel{
 		lasPartesDeSnake.last().crecer()
 		snake.sumarPuntos()
 		game.removeVisual(self)
-		self.reset()
+		snake.resetAllItems()
+		if (snake.hayBombas()){
+			snake.agregarBomba()
+		}
 	    game.addVisual(self)
 	}
 	     
+}
+
+class Bomba inherits ItemEnNivel{
+	var property image = "bomba.png"
+	
+	method colisionar(){
+		snake.pantallaDeMuerte(1)
+	}
 }
 /*class Manzana inherits ItemEnNivel{
 	var image = "manzana.png"

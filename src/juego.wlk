@@ -7,6 +7,8 @@ object snake{
 	var property puntos = 0
 	const puntaje = new Puntaje(quePoner = puntos, position = game.at(15, 11))
 	var item = null
+	var property hayBombas = false
+	var nroDeBombas = 1
 	
     method juego(){
 		pantallaDeInicio.iniciar(1)
@@ -24,7 +26,7 @@ object snake{
 	}
 	method puntos() = puntos
 	
-    method personaje(){
+    method personaje(dificultad){
     	// el jugador
 		const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
 		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
@@ -35,7 +37,7 @@ object snake{
 		game.addVisual(jugador)
 		game.addVisual(parte1)
 		game.addVisual(parte2)
-		self.items()
+		self.items(dificultad)
 		
 		lasPartesDeSnake.add(jugador)
 		lasPartesDeSnake.add(parte1)
@@ -58,13 +60,26 @@ object snake{
 		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})*/
 		
 	}
-    method items(){
+    method items(dificultad){
     	//items
 		const manzana = new Manzana(position = game.at(10,10))
-		item = manzana
-		game.addVisual(manzana)
-		keyboard.c().onPressDo({manzana.sacarViablesOcup()})
-		
+		const bomba = new Bomba(position = game.at (10,5))
+		if (dificultad == "dificil") item =[manzana,bomba] else item = [manzana]
+		//item = [manzana]
+		item.forEach({items => game.addVisual(items)})
+		keyboard.c().onPressDo({manzana.sacarViablesOcup()})	
+    }
+    method resetAllItems(){
+    	item.forEach({items => items.reset()})
+    }
+    method activarBombas(){hayBombas = true}
+    method agregarBomba(){
+    	if (nroDeBombas < 15){
+    		item.add(new Bomba(position = game.at(19,19)))
+    		var nuevaBomba = item.last()
+    		game.addVisual(nuevaBomba)
+    		nroDeBombas += 1
+    	}
     }
     
     method pantallaDeMuerte(a) {
@@ -78,8 +93,10 @@ object snake{
 		keyboard.space().onPressDo({
 			if (on == 1){
 			    game.removeVisual(gameOver)
-			    game.removeVisual(item)
+			    item.forEach({items => game.removeVisual(items)})
 			    game.removeVisual(puntaje)
+			    hayBombas = false
+			    nroDeBombas = 1
 			    puntaje.position(game.at(15, 11))
 			    puntos = 0
 			    puntaje.quePoner(puntos)
@@ -102,9 +119,17 @@ object pantallaDeInicio {
 		var on = a
 		game.addVisual(self)
 		keyboard.q().onPressDo({snake.terminarJuego()})
-		keyboard.enter().onPressDo({
+		keyboard.num1().onPressDo({
 			 if (on == 1){
-			 	snake.personaje()
+			 	snake.personaje("normal")
+			    game.removeVisual(self)
+			 	on -= 1
+			 }
+		})
+		keyboard.num2().onPressDo({
+			 if (on == 1){
+			 	snake.personaje("dificil")
+			 	snake.activarBombas()
 			    game.removeVisual(self)
 			 	on -= 1
 			 }
