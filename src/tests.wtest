@@ -27,4 +27,3 @@ test "test de verificacion de crecimiento"{
 	assert.equals(4, lasPartesDeSnake.size())
 	
 }
-
