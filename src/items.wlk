@@ -6,14 +6,6 @@ import player.*
 class ItemEnNivel{
 	var property position 
 
-	    method reubicar(){
-		
-        /*const nuevox = 0.randomUpTo(game.width())
-		const nuevoy = 0.randomUpTo(game.height())
-		position = game.at(nuevox,nuevoy)*/
-		}
-	    
-	    
 	    method reset(){
 	    	const coordsViables = [[0,0],[0,1],[0,2],[0,2],[0,3],[0,4],[0,5],[0,6],[0,7],[0,8],[0,9],[0,10],[0,11],
 			                    [1,0],[1,1],[1,2],[1,2],[1,3],[1,4],[1,5],[1,6],[1,7],[1,8],[1,9],[1,10],[1,11],
@@ -42,10 +34,11 @@ class ItemEnNivel{
 	    }
 		
 }
+
 class Manzana inherits ItemEnNivel{
 	var property image = "manzana.png"
 	
-     method colisionar(/*ponerjuegoaqui*/){
+     method colisionar(){
 		lasPartesDeSnake.last().crecer()
 		snake.sumarPuntos()
 		game.removeVisual(self)
@@ -65,19 +58,3 @@ class Bomba inherits ItemEnNivel{
 		snake.pantallaDeMuerte(1)
 	}
 }
-/*class Manzana inherits ItemEnNivel{
-	var image = "manzana.png"
-	method image() = image
-	method comido(){
-	     lasPartesDeSnake.add(new ParteDeSnake(
-	     	nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
-	     	position = lasPartesDeSnake.last().position()))
-	     	 
-	     game.addVisual(lasPartesDeSnake.last())
-	     game.removeVisual(self)
-	     self.reset()
-	     game.addVisual(self)
-	     
-	     
-	}
-}¨*/

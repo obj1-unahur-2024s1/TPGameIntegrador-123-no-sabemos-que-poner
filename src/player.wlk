@@ -10,7 +10,7 @@ class ParteDeSnake {
 	var property siguienteaDondeIr = null
 	var property nroDeParte = 0
 	var property position = game.center()
-	var property image = "cuerpoArAb.png" //importa que sea una propiedad para que se abra el programa
+	var property image = "cuerpoArAb.png" 
 	
 	method siguienteaDondeIr() = siguienteaDondeIr
 	method aDondeIr() = aDondeIr
@@ -46,10 +46,9 @@ class ParteDeSnake {
 	     	 
 	     game.addVisual(lasPartesDeSnake.last())
 	}
+	
 	method colisionar() {
-		    snake.pantallaDeMuerte(1)	
-			
-			
+		    snake.pantallaDeMuerte(1)			
 		}	
 
 }
@@ -57,13 +56,6 @@ class ParteDeSnake {
 class CabezaDeSnake inherits ParteDeSnake {
 	override method image() = image
 	
-	override method conseguirSiguienteaDondeIr(){/*
-        keyboard.up().onPressDo(if (aDondeIr == "down") siguienteaDondeIr = "up" else siguienteaDondeIr)
-		keyboard.down().onPressDo(if (aDondeIr == "up") siguienteaDondeIr = "down" else siguienteaDondeIr)
-		keyboard.left().onPressDo(if (aDondeIr == "right") siguienteaDondeIr = "left" else siguienteaDondeIr)
-		keyboard.right().onPressDo(if (aDondeIr == "left") siguienteaDondeIr = "right" else siguienteaDondeIr)
-*/	}
-
 	override method moverse(){
 		aDondeIr = siguienteaDondeIr
 		if (position.y() == 0 or position.y() == 12 or position.x() == 0 or position.x() == 16) 
@@ -83,16 +75,5 @@ class CabezaDeSnake inherits ParteDeSnake {
 			image = "cabezaAbajo.png"
 		}}
 		}
-		
-		method morir() {
-			
-			
-			
-		}
-		
-	override method colisionar(){
-	
-		    snake.pantallaDeMuerte(1)	
-			
-	}
+
 }

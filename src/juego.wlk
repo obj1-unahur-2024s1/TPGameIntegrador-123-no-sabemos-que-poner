@@ -3,7 +3,7 @@ import player.*
 import items.*
 import interfazYMenu.*
 
-object snake{
+object snake {
 	var property puntos = 0
 	const puntaje = new Puntaje(quePoner = puntos, position = game.at(15, 11))
 	var item = null
@@ -12,22 +12,18 @@ object snake{
 	
     method juego(){
 		pantallaDeInicio.iniciar(1)
-	    game.start()
-	    	    	    
-	}
+	    game.start()}
 	
 	method sumarPuntos(){
-		puntos += 100 //funciona
+		puntos += 100
 		puntaje.cambiarTexto(puntos)
 	}
 	
-	method terminarJuego(){
-		game.stop()
-	}
+	method terminarJuego() {game.stop()}
+	
 	method puntos() = puntos
 	
     method personaje(dificultad){
-    	// el jugador
 		const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
 		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
 		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
@@ -44,7 +40,7 @@ object snake{
 		lasPartesDeSnake.add(parte2)
 		
 		
-		game.onCollideDo(jugador, {a => a.colisionar(/*ponerjuegoaqui*/)})
+		game.onCollideDo(jugador, {a => a.colisionar()})
 		
 		keyboard.up().onPressDo({if (not (jugador.siguienteaDondeIr() == "down")) jugador.siguienteaDondeIr("up") else jugador.siguienteaDondeIr()})
 		keyboard.down().onPressDo({if (not (jugador.siguienteaDondeIr() == "up")) jugador.siguienteaDondeIr("down") else jugador.siguienteaDondeIr()})
@@ -53,45 +49,41 @@ object snake{
 
 		
 		game.onTick(300, "movimientoDelJugador", {lasPartesDeSnake.forEach({a => a.moverse()})})
-		
-		/*keyboard.up().onPressDo({jugador.siguienteaDondeIr("up")})
-		keyboard.down().onPressDo({jugador.siguienteaDondeIr("down")})
-		keyboard.left().onPressDo({jugador.siguienteaDondeIr("left")})
-		keyboard.right().onPressDo({jugador.siguienteaDondeIr("right")})*/
-		
+			
 	}
-    method items(dificultad){
-    	//items
+	
+    method items(dificultad) {
 		const manzana = new Manzana(position = game.at(10,10))
 		const bomba = new Bomba(position = game.at (10,5))
 		if (dificultad == "dificil") item =[manzana,bomba] else item = [manzana]
-		//item = [manzana]
 		item.forEach({items => game.addVisual(items)})
 		keyboard.c().onPressDo({manzana.sacarViablesOcup()})	
     }
-    method resetAllItems(){
-    	item.forEach({items => items.reset()})
-    }
-    method activarBombas(){hayBombas = true}
-    method agregarBomba(){
-    	if (nroDeBombas < 15){
+    
+    method resetAllItems() {item.forEach({items => items.reset()})}
+    
+    method activarBombas() {hayBombas = true}
+    
+    method agregarBomba() {
+    	if (nroDeBombas < 15) {
     		item.add(new Bomba(position = game.at(19,19)))
-    		var nuevaBomba = item.last()
+    		const nuevaBomba = item.last()
     		game.addVisual(nuevaBomba)
-    		nroDeBombas += 1
-    	}
+    		nroDeBombas += 1}
     }
     
     method pantallaDeMuerte(a) {
     	var on = a
     	
-		game.addVisual(gameOver) 
+    	game.removeVisual(puntaje)
 		puntaje.position(game.at(10, 6))
+		game.addVisual(gameOver)
+		game.addVisual(puntaje)
 		lasPartesDeSnake.forEach({cuerpo => game.removeVisual(cuerpo)})
 		game.removeTickEvent("movimientoDelJugador")
 		
 		keyboard.space().onPressDo({
-			if (on == 1){
+			if (on == 1) {
 			    game.removeVisual(gameOver)
 			    item.forEach({items => game.removeVisual(items)})
 			    game.removeVisual(puntaje)
@@ -104,9 +96,7 @@ object snake{
 			    lasPartesDeSnake.clear()
 			    game.removeVisual(fondoNivel)                           
 			    pantallaDeInicio.iniciar(1)		
-			    on -= 1
-			} 
-				
+			    on -= 1}
 		})
 	}
 }
@@ -124,21 +114,20 @@ object pantallaDeInicio {
 			 	snake.personaje("normal")
 			    game.removeVisual(self)
 			 	on -= 1
-			 }
-		})
+			 }})
+		
 		keyboard.num2().onPressDo({
 			 if (on == 1){
 			 	snake.personaje("dificil")
 			 	snake.activarBombas()
 			    game.removeVisual(self)
-			 	on -= 1
-			 }
-		})
+			 	on -= 1}
+			 })
 	}
 }
 
 object gameOver {
-	var property image = "fondoGameOver1.PNG"
+	var property image = "fondoGameOver.PNG"
 	var property position = game.at(0, 0)
 }
 
