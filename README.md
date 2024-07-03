@@ -5,6 +5,7 @@
 - Ramiro Castro
 - Jonas Gonzales 
 - Agustina Esjaita
+- Lucas Crusvar 
 
 ## Capturas
 
