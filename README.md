@@ -5,8 +5,6 @@
 - Ramiro Castro
 - Jonas Gonzales 
 - Agustina Esjaita
-- persona
-- etc
 
 ## Capturas
 
@@ -25,5 +23,5 @@ Cuenta con dos modos/niveles de dificultad;
 ## Otros
 
 - Tecnicatura en Programación de Videojuegos - UNAHUR 
-- Versión de wollok: 
+- Versión de wollok 3.0.0
 - Una vez terminado, no tenemos problemas en que el repositorio sea público
