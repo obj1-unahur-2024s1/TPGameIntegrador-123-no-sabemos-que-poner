@@ -15,5 +15,7 @@ object puntaje {
 	
 	method sumarPuntos() {puntos = puntos + 100}
 	
-	method colisionar() {}				  
+	method colisionar() {}
+	
+	method reset(){}				  
 }

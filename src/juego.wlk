@@ -14,6 +14,8 @@ object snake {
 	
 	method terminarJuego() {game.stop()}
 	
+	
+	
     method personaje(){
 		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
 		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
@@ -47,8 +49,10 @@ object snake {
 		
 		if (nivelDificil.estaActivado()) items.addAll([manzana,bomba]) else items.add(manzana)
 		
-		items.forEach({item => game.addVisual(item)})	
+		items.forEach({item => game.addVisual(item)})
     }
+    
+    
     
     method resetAllItems() {items.forEach({item => item.reset()})}
     
@@ -62,3 +66,4 @@ object snake {
     
     method paraTodosLosItems(condicion) = items.forEach(condicion)
 }
+

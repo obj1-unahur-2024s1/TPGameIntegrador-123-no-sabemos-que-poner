@@ -59,6 +59,8 @@ object cabezaDeSnake {
 	method paraTodas(efecto) = lasPartesDeSnake.forEach(efecto)
 	
 	method cuerpoTamanio() = lasPartesDeSnake.size()
+	
+	method reset(){}
 }
 
 class ParteDeSnake {
@@ -95,6 +97,8 @@ class ParteDeSnake {
 	}	
 	
 	
-	method colisionar() {pantallaDeMuerte.iniciar(1)}	
+	method colisionar() {pantallaDeMuerte.iniciar(1)}
+	
+	method reset(){}	
 
 }

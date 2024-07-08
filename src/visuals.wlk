@@ -45,6 +45,7 @@ object gameOver {
 object fondoNivel {
 	const property image = "assets/FondoTablero.png"
 	const property position = game.at(0, 0)
+	method reset(){}
 }
 
 object fondoMenu {
