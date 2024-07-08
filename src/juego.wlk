@@ -6,9 +6,7 @@ import visuals.*
 import instanciasDeJuego.*
 
 object snake {
-	var item = null
-	var property hayBombas = false
-	var nroDeBombas = 1
+	const items = []
 	
     method juego(){
 		pantallaDeInicio.iniciar(1)
@@ -16,7 +14,7 @@ object snake {
 	
 	method terminarJuego() {game.stop()}
 	
-    method personaje(dificultad){
+    method personaje(){
 		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
 		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
 		
@@ -25,7 +23,7 @@ object snake {
 		game.addVisual(cabezaDeSnake)
 		game.addVisual(parte1)
 		game.addVisual(parte2)
-		self.items(dificultad)
+		self.itemsEnJuego()
 		
 		cabezaDeSnake.agregar(parte1)
 		cabezaDeSnake.agregar(parte2)
@@ -43,55 +41,24 @@ object snake {
 			
 	}
 	
-    method items(dificultad) {
+    method itemsEnJuego() {
 		const manzana = new Manzana(position = game.at(10,10))
 		const bomba = new Bomba(position = game.at (10,5))
-		if (dificultad == "dificil") item =[manzana,bomba] else item = [manzana]
-		item.forEach({items => game.addVisual(items)})	
-    }
-    
-    method resetAllItems() {item.forEach({items => items.reset()})}
-    
-    method activarBombas() {hayBombas = true}
-    
-    method agregarBomba() {
-    	if (nroDeBombas < 15) {
-    		item.add(new Bomba(position = game.at(19,19)))
-    		const nuevaBomba = item.last()
-    		game.addVisual(nuevaBomba)
-    		nroDeBombas += 1}
-    }
-    
-    method pantallaDeMuerte(a) {
-    	var on = a
-    	
-    	game.removeVisual(puntaje)
-		puntaje.position(game.at(10, 6))
-		puntaje.color("3C00FF")
-		game.addVisual(gameOver)
-		game.addVisual(puntaje)
-		cabezaDeSnake.paraTodas({cuerpo => game.removeVisual(cuerpo)})
-		game.removeTickEvent("movimientoDelJugador")
 		
-		keyboard.space().onPressDo({
-			if (on == 1) {
-			    game.removeVisual(gameOver)
-			    item.forEach({items => game.removeVisual(items)})
-			    game.removeVisual(puntaje)
-			    hayBombas = false
-			    nroDeBombas = 1
-			    puntaje.position(game.at(15, 11))
-			    puntaje.color("F4FF00")
-			    puntaje.puntos(0)
-			    puntaje.quePoner(puntaje.puntos())
-			    item = null
-			    cabezaDeSnake.reiniciar()
-			    cabezaDeSnake.position(game.at(2, 3))
-			    cabezaDeSnake.image(derecha.image())
-			    cabezaDeSnake.siguienteaDondeIr("right")
-			    game.removeVisual(fondoNivel)                           
-			    pantallaDeInicio.iniciar(1)		
-			    on -= 1}
-		})
-	}
+		if (nivelDificil.estaActivado()) items.addAll([manzana,bomba]) else items.add(manzana)
+		
+		items.forEach({item => game.addVisual(item)})	
+    }
+    
+    method resetAllItems() {items.forEach({item => item.reset()})}
+    
+    method bombaNueva() {
+    	items.add(new Bomba(position = game.at(19,19)))
+    		const nuevaBomba = items.last()
+    		game.addVisual(nuevaBomba)
+    }
+    
+    method reiniciarItems() = items.clear()
+    
+    method paraTodosLosItems(condicion) = items.forEach(condicion)
 }

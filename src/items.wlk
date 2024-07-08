@@ -2,6 +2,7 @@ import wollok.game.*
 import juego.*
 import player.*
 import puntuaciones.*
+import instanciasDeJuego.*
 
 
 class ItemEnNivel{
@@ -45,8 +46,9 @@ class Manzana inherits ItemEnNivel{
 		puntaje.quePoner(puntaje.puntos())
 		game.removeVisual(self)
 		snake.resetAllItems()
-		if (snake.hayBombas()){
-			snake.agregarBomba()
+		
+		if (nivelDificil.estaActivado()){
+			nivelDificil.agregarBomba()
 		}
 	    game.addVisual(self)
 	}
@@ -57,6 +59,6 @@ class Bomba inherits ItemEnNivel{
 	var property image = "bomba.png"
 	
 	method colisionar(){
-		snake.pantallaDeMuerte(1)
+		pantallaDeMuerte.iniciar(1)
 	}
 }

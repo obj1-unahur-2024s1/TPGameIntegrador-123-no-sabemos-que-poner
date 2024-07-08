@@ -3,6 +3,7 @@ import juego.*
 import items.*
 import visuals.*
 import puntuaciones.*
+import instanciasDeJuego.*
 
 object cabezaDeSnake {
 	var property aDondeIr 
@@ -20,20 +21,20 @@ object cabezaDeSnake {
 		if (position.y() == 0 or position.y() == 12 or position.x() == 0 or position.x() == 16) 
 			{self.colisionar()} 
 			else {
-		if (aDondeIr == "left"){
+		if (aDondeIr == "left") {
 			position = position.left(1)
 			image = "cabezaIzquierda.png"
-		} if (aDondeIr == "up"){
+		} if (aDondeIr == "up") {
 			position = position.up(1)
 			image = "cabezaArriba.png"
-		} if (aDondeIr == "right"){
+		} if (aDondeIr == "right") {
 			position = position.right(1)
 			image = "cabezaDerecha.png"
-		} if (aDondeIr == "down"){
+		} if (aDondeIr == "down") {
 			position = position.down(1)
-			image = "cabezaAbajo.png"
-		}}
+			image = "cabezaAbajo.png"}
 		}
+	}
 	
 	method agregar(parte) {lasPartesDeSnake.add(parte)}
 	
@@ -41,8 +42,6 @@ object cabezaDeSnake {
 		lasPartesDeSnake.clear()
 		lasPartesDeSnake.add(self)
 	}
-	
-	method cuerpo() = lasPartesDeSnake
 	
 	method encontrar(condicion) = lasPartesDeSnake.find(condicion)
 	
@@ -55,12 +54,11 @@ object cabezaDeSnake {
 
 	method ultimaParte() = lasPartesDeSnake.last()
 	
-	method colisionar() {
-		    snake.pantallaDeMuerte(1)			
-		}
+	method colisionar() {pantallaDeMuerte.iniciar(1)}
 	
 	method paraTodas(efecto) = lasPartesDeSnake.forEach(efecto)
 	
+	method cuerpoTamanio() = lasPartesDeSnake.size()
 }
 
 class ParteDeSnake {
@@ -76,10 +74,9 @@ class ParteDeSnake {
 	method conseguirSiguienteaDondeIr(){
 		siguienteaDondeIr = (cabezaDeSnake.encontrar(
 			{p => p.nroDeParte() +1 == self.nroDeParte()}
-		).aDondeIr())
-	}
+		).aDondeIr())}
 	
-	method moverse(){
+	method moverse() {
 		aDondeIr = siguienteaDondeIr
 		if (aDondeIr == "left"){
 			position = position.left(1)
@@ -98,8 +95,6 @@ class ParteDeSnake {
 	}	
 	
 	
-	method colisionar() {
-		    snake.pantallaDeMuerte(1)			
-		}	
+	method colisionar() {pantallaDeMuerte.iniciar(1)}	
 
 }

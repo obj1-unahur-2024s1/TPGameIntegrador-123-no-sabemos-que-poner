@@ -20,6 +20,6 @@ test "test de verificacion de crecimiento"{
 	cabezaDeSnake.crear()
 	cabezaDeSnake.crear()
 	
-	assert.equals(4, cabezaDeSnake.cuerpo().size())
+	assert.equals(4, cabezaDeSnake.cuerpoTamanio())
 	
 }
