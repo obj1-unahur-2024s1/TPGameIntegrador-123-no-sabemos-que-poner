@@ -5,8 +5,6 @@ import player.*
 import puntuaciones.*
 import wollok.game.*
 
-const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
-
 
 test "test de verificacion de funcionamiento de agregar puntos" {
 	puntaje.sumarPuntos()
@@ -18,11 +16,10 @@ test "test de verificacion de funcionamiento de agregar puntos" {
 
 }
 test "test de verificacion de crecimiento"{
-	lasPartesDeSnake.add(jugador)
-	jugador.crecer()
-	jugador.crecer()
-	jugador.crecer()
+	cabezaDeSnake.crear()
+	cabezaDeSnake.crear()
+	cabezaDeSnake.crear()
 	
-	assert.equals(4, lasPartesDeSnake.size())
+	assert.equals(4, cabezaDeSnake.cuerpo().size())
 	
 }
