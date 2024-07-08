@@ -45,7 +45,7 @@ object cabezaDeSnake {
 	
 	method encontrar(condicion) = lasPartesDeSnake.find(condicion)
 	
-	method crear() {
+	method crearParte() {
 		self.agregar(new ParteDeSnake(
 			nroDeParte = lasPartesDeSnake.last().nroDeParte() + 1,
 	     	position = lasPartesDeSnake.last().position()))
@@ -56,7 +56,7 @@ object cabezaDeSnake {
 	
 	method colisionar() {pantallaDeMuerte.iniciar(1)}
 	
-	method paraTodas(efecto) = lasPartesDeSnake.forEach(efecto)
+	method paraTodasLasPartes(efecto) = lasPartesDeSnake.forEach(efecto)
 	
 	method cuerpoTamanio() = lasPartesDeSnake.size()
 	

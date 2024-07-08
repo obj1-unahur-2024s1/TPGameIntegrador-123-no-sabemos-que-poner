@@ -15,7 +15,7 @@ object pantallaDeInicio {
 		
 		keyboard.num1().onPressDo({
 			 if (on == 1){
-			 	snake.personaje()
+			 	snake.nivel()
 			    game.removeVisual(fondoMenu)
 			 	on -= 1
 			 }})
@@ -23,7 +23,7 @@ object pantallaDeInicio {
 		keyboard.num2().onPressDo({
 			 if (on == 1){
 			 	nivelDificil.activar()
-			 	snake.personaje()
+			 	snake.nivel()
 			    game.removeVisual(fondoMenu)
 			 	on -= 1}
 			 })
@@ -37,34 +37,45 @@ object pantallaDeMuerte {
 	method iniciar(a) {
     	var on = a
     	
-    	game.removeVisual(puntaje)
-		puntaje.position(game.at(10, 6))
-		puntaje.color("3C00FF")
-		game.addVisual(gameOver)
-		game.addVisual(puntaje)
-		cabezaDeSnake.paraTodas({cuerpo => game.removeVisual(cuerpo)})
-		game.removeTickEvent("movimientoDelJugador")
+    	self.detenerTodo()
 		
 		keyboard.space().onPressDo({
 			if (on == 1) {
 			    game.removeVisual(gameOver)
-			    snake.paraTodosLosItems({item => game.removeVisual(item)})
-			    game.removeVisual(puntaje)
+			    self.settearPuntaje()
+			    self.settearSnake()
 			    nivelDificil.desactivar()
-			    nivelDificil.reiniciarBombas()
-			    puntaje.position(game.at(15, 11))
-			    puntaje.color("F4FF00")
-			    puntaje.puntos(0)
-			    puntaje.quePoner(puntaje.puntos())
-			    snake.reiniciarItems()
-			    cabezaDeSnake.reiniciar()
-			    cabezaDeSnake.position(game.at(2, 3))
-			    cabezaDeSnake.image(derecha.image())
-			    cabezaDeSnake.siguienteaDondeIr("right")
 			    game.removeVisual(fondoNivel)                           
 			    pantallaDeInicio.iniciar(1)		
-			    on -= 1}
-		})
+			    on -= 1}})
+	}
+	
+	method detenerTodo() {
+		game.removeVisual(puntaje)
+		puntaje.position(game.at(10, 6))
+		puntaje.color("3C00FF")
+		game.addVisual(gameOver)
+		game.addVisual(puntaje)
+		cabezaDeSnake.paraTodasLasPartes({cuerpo => game.removeVisual(cuerpo)})
+		game.removeTickEvent("movimientoDelJugador")
+	}
+	
+	method settearPuntaje() {
+		game.removeVisual(puntaje)
+		puntaje.position(game.at(15, 11))
+		puntaje.color("F4FF00")
+		puntaje.puntos(0)
+		puntaje.quePoner(puntaje.puntos())
+	}
+	
+	method settearSnake() {
+		snake.paraTodosLosItems({item => game.removeVisual(item)})
+		snake.reiniciarItems()
+		cabezaDeSnake.reiniciar()
+		cabezaDeSnake.position(game.at(2, 3))
+		cabezaDeSnake.image(derecha.image())
+		cabezaDeSnake.siguienteaDondeIr("right")
+		
 	}
 }
 

@@ -16,9 +16,9 @@ test "test de verificacion de funcionamiento de agregar puntos" {
 
 }
 test "test de verificacion de crecimiento"{
-	cabezaDeSnake.crear()
-	cabezaDeSnake.crear()
-	cabezaDeSnake.crear()
+	cabezaDeSnake.crearParte()
+	cabezaDeSnake.crearParte()
+	cabezaDeSnake.crearParte()
 	
 	assert.equals(4, cabezaDeSnake.cuerpoTamanio())
 	

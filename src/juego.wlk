@@ -16,7 +16,7 @@ object snake {
 	
 	
 	
-    method personaje(){
+    method nivel(){
 		const parte1 = new ParteDeSnake(position = game.at(1,3), nroDeParte = 1, siguienteaDondeIr = "right")
 		const parte2 = new ParteDeSnake(position = game.at(0,3), nroDeParte = 2, siguienteaDondeIr = "right")
 		
@@ -39,7 +39,7 @@ object snake {
 		keyboard.right().onPressDo({if (not (cabezaDeSnake.siguienteaDondeIr() == "left")) cabezaDeSnake.siguienteaDondeIr("right") else cabezaDeSnake.siguienteaDondeIr()})
 
 		
-		game.onTick(300, "movimientoDelJugador", {cabezaDeSnake.paraTodas({a => a.moverse()})})
+		game.onTick(300, "movimientoDelJugador", {cabezaDeSnake.paraTodasLasPartes({a => a.moverse()})})
 			
 	}
 	
