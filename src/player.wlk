@@ -1,7 +1,7 @@
 import wollok.game.*
 import juego.*
 import items.*
-import interfazYMenu.*
+import puntuaciones.*
 
 const lasPartesDeSnake = []
 

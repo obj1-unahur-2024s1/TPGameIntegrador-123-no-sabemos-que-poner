@@ -2,20 +2,19 @@ import player.*
 import items.*
 import juego.*
 import player.*
-import interfazYMenu.*
+import puntuaciones.*
 import wollok.game.*
 
-const lasPartesDeSnake = []
 const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
 
 
 test "test de verificacion de funcionamiento de agregar puntos" {
-	snake.sumarPuntos()
-	snake.sumarPuntos()
-	snake.sumarPuntos()
+	puntaje.sumarPuntos()
+	puntaje.sumarPuntos()
+	puntaje.sumarPuntos()
 	
 
-	assert.equals(300, snake.puntos())
+	assert.equals(300, puntaje.puntos())
 
 }
 test "test de verificacion de crecimiento"{

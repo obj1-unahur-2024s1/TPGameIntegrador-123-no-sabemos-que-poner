@@ -2,7 +2,7 @@ import wollok.game.*
 import juego.*
 import player.*
 import items.*
-import interfazYMenu.*
+import puntuaciones.*
 
 
 program snakes {

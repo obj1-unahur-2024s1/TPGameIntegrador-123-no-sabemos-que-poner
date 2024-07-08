@@ -1,11 +1,11 @@
 import wollok.game.*
 import player.*
 import items.*
-import interfazYMenu.*
+import puntuaciones.*
+import visuals.*
+import instanciasDeJuego.*
 
 object snake {
-	var property puntos = 0
-	const puntaje = new Puntaje(quePoner = puntos, position = game.at(15, 11))
 	var item = null
 	var property hayBombas = false
 	var nroDeBombas = 1
@@ -14,14 +14,7 @@ object snake {
 		pantallaDeInicio.iniciar(1)
 	    game.start()}
 	
-	method sumarPuntos(){
-		puntos += 100
-		puntaje.cambiarTexto(puntos)
-	}
-	
 	method terminarJuego() {game.stop()}
-	
-	method puntos() = puntos
 	
     method personaje(dificultad){
 		const jugador = new CabezaDeSnake(position = game.at(2,3), siguienteaDondeIr = "right")
@@ -77,6 +70,7 @@ object snake {
     	
     	game.removeVisual(puntaje)
 		puntaje.position(game.at(10, 6))
+		puntaje.color("3C00FF")
 		game.addVisual(gameOver)
 		game.addVisual(puntaje)
 		lasPartesDeSnake.forEach({cuerpo => game.removeVisual(cuerpo)})
@@ -90,8 +84,9 @@ object snake {
 			    hayBombas = false
 			    nroDeBombas = 1
 			    puntaje.position(game.at(15, 11))
-			    puntos = 0
-			    puntaje.quePoner(puntos)
+			    puntaje.color("F4FF00")
+			    puntaje.puntos(0)
+			    puntaje.quePoner(puntaje.puntos())
 			    item = null
 			    lasPartesDeSnake.clear()
 			    game.removeVisual(fondoNivel)                           
@@ -99,39 +94,4 @@ object snake {
 			    on -= 1}
 		})
 	}
-}
-
-object pantallaDeInicio {
-	var property position = game.at(0, 0)
-	var property image = "fondoVioleta.jpg"
-		
-	method iniciar(a) {
-		var on = a
-		game.addVisual(self)
-		keyboard.q().onPressDo({snake.terminarJuego()})
-		keyboard.num1().onPressDo({
-			 if (on == 1){
-			 	snake.personaje("normal")
-			    game.removeVisual(self)
-			 	on -= 1
-			 }})
-		
-		keyboard.num2().onPressDo({
-			 if (on == 1){
-			 	snake.personaje("dificil")
-			 	snake.activarBombas()
-			    game.removeVisual(self)
-			 	on -= 1}
-			 })
-	}
-}
-
-object gameOver {
-	var property image = "fondoGameOver.PNG"
-	var property position = game.at(0, 0)
-}
-
-object fondoNivel {
-	var property image = "FondoTablero.png"
-	var property position = game.at(0, 0)
 }

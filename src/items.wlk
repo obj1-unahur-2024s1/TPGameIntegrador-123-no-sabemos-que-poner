@@ -1,6 +1,7 @@
 import wollok.game.*
 import juego.*
 import player.*
+import puntuaciones.*
 
 
 class ItemEnNivel{
@@ -40,7 +41,8 @@ class Manzana inherits ItemEnNivel{
 	
      method colisionar(){
 		lasPartesDeSnake.last().crecer()
-		snake.sumarPuntos()
+		puntaje.sumarPuntos()
+		puntaje.quePoner(puntaje.puntos())
 		game.removeVisual(self)
 		snake.resetAllItems()
 		if (snake.hayBombas()){
