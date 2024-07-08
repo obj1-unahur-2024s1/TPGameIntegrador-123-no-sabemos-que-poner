@@ -1,0 +1,18 @@
+import items.*
+import wollok.game.*
+
+program abc {
+	game.height(5)
+	game.width(5)
+	
+	const item = new ItemEnNivel(position = game.center(), image = "bomba.png")
+	game.addVisual(item)
+	
+	keyboard.any().onPressDo({const nuevoitem = new ItemEnNivel(position = game.center(), image = "bomba.png")
+		game.addVisual(nuevoitem)})
+		
+	game.onCollideDo(item, {a => a.reset()})	
+	
+	game.start()
+}
+
