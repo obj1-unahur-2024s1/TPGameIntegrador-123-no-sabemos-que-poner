@@ -11,5 +11,5 @@ program snakes {
 	game.width(16)
 	
 	snake.juego()
-	
+
 }

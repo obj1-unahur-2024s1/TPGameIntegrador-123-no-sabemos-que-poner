@@ -14,19 +14,23 @@ object pantallaDeInicio {
 		keyboard.q().onPressDo({snake.terminarJuego()})
 		
 		keyboard.num1().onPressDo({
-			 if (on == 1){
+			/*los "on == 1" manejan que la pantalla se ejecute una sola vez,
+			 ya que las colisiones implican la misma accion pero con diferentes objetos.
+			 Sin esto, las pantallas se intentan iniciar varias veces (una por cada objeto 
+			 que colisionó) y saltan los errores de que ya estan en pantalla o no se encuentran
+			 en pantalla, etc.
+			 */
+			 if (on == 1) {
 			 	snake.nivel()
 			    game.removeVisual(fondoMenu)
-			 	on -= 1
-			 }})
+			 	on -= 1}})
 		
 		keyboard.num2().onPressDo({
 			 if (on == 1){
 			 	nivelDificil.activar()
 			 	snake.nivel()
 			    game.removeVisual(fondoMenu)
-			 	on -= 1}
-			 })
+			 	on -= 1}})
 	}
 }
 
@@ -41,12 +45,9 @@ object pantallaDeMuerte {
 		
 		keyboard.space().onPressDo({
 			if (on == 1) {
-			    game.removeVisual(gameOver)
 			    self.settearPuntaje()
 			    self.settearSnake()
-			    nivelDificil.desactivar()
-			    game.removeVisual(fondoNivel)                           
-			    pantallaDeInicio.iniciar(1)		
+			    self.settearNivel()	
 			    on -= 1}})
 	}
 	
@@ -73,9 +74,16 @@ object pantallaDeMuerte {
 		snake.reiniciarItems()
 		cabezaDeSnake.reiniciar()
 		cabezaDeSnake.position(game.at(2, 3))
-		cabezaDeSnake.image(derecha.image())
+		//cabezaDeSnake.image(derecha.image())
 		cabezaDeSnake.siguienteaDondeIr("right")
-		
+		//izquierda.position(null)
+	}
+	
+	method settearNivel() {
+		game.removeVisual(gameOver)
+		game.removeVisual(fondoNivel)
+		nivelDificil.desactivar()
+		pantallaDeInicio.iniciar(1)
 	}
 }
 

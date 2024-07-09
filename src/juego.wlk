@@ -22,6 +22,7 @@ object snake {
 		
 		game.addVisual(fondoNivel)
 		game.addVisual(puntaje)
+		cabezaDeSnake.image(derecha.image())
 		game.addVisual(cabezaDeSnake)
 		game.addVisual(parte1)
 		game.addVisual(parte2)
@@ -33,10 +34,10 @@ object snake {
 		
 		game.onCollideDo(cabezaDeSnake, {a => a.colisionar()})
 		
-		keyboard.up().onPressDo({if (not (cabezaDeSnake.siguienteaDondeIr() == "down")) cabezaDeSnake.siguienteaDondeIr("up") else cabezaDeSnake.siguienteaDondeIr()})
-		keyboard.down().onPressDo({if (not (cabezaDeSnake.siguienteaDondeIr() == "up")) cabezaDeSnake.siguienteaDondeIr("down") else cabezaDeSnake.siguienteaDondeIr()})
-		keyboard.left().onPressDo({if (not (cabezaDeSnake.siguienteaDondeIr() == "right")) cabezaDeSnake.siguienteaDondeIr("left") else cabezaDeSnake.siguienteaDondeIr()})
-		keyboard.right().onPressDo({if (not (cabezaDeSnake.siguienteaDondeIr() == "left")) cabezaDeSnake.siguienteaDondeIr("right") else cabezaDeSnake.siguienteaDondeIr()})
+		keyboard.up().onPressDo({cabezaDeSnake.puedeIrArriba()})
+		keyboard.down().onPressDo({cabezaDeSnake.puedeIrAbajo()})
+		keyboard.left().onPressDo({cabezaDeSnake.puedeIrIzquierda()})
+		keyboard.right().onPressDo({cabezaDeSnake.puedeIrDerecha()})
 
 		
 		game.onTick(300, "movimientoDelJugador", {cabezaDeSnake.paraTodasLasPartes({a => a.moverse()})})

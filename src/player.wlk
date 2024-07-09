@@ -18,23 +18,44 @@ object cabezaDeSnake {
 	method moverse() {
 		aDondeIr = siguienteaDondeIr
 		
-		if (position.y() == 0 or position.y() == 12 or position.x() == 0 or position.x() == 16) 
-			{self.colisionar()} 
-			else {
-		if (aDondeIr == "left") {
-			position = position.left(1)
-			image = "cabezaIzquierda.png"
-		} if (aDondeIr == "up") {
-			position = position.up(1)
-			image = "cabezaArriba.png"
-		} if (aDondeIr == "right") {
-			position = position.right(1)
-			image = "cabezaDerecha.png"
-		} if (aDondeIr == "down") {
-			position = position.down(1)
-			image = "cabezaAbajo.png"}
-		}
+		if (self.estaEnElBorde()) {
+			self.colisionar()} 
+		else {
+			if (aDondeIr == "left") {izquierda.avanzar(position)} 
+			if (aDondeIr == "up") {arriba.avanzar(position)} 
+			if (aDondeIr == "right") {derecha.avanzar(position)} 
+			if (aDondeIr == "down") {abajo.avanzar(position)}}	
 	}
+	
+	method estaEnElBorde() {
+		return position.y() == 0 or 
+			   position.y() == 12 or 
+			   position.x() == 0 or 
+			   position.x() == 16
+	}
+	
+	method puedeIrDerecha() {
+		if (not (self.siguienteaDondeIr() == "left")) 
+			 self.siguienteaDondeIr("right") 
+		else self.siguienteaDondeIr()
+	}
+	
+	method puedeIrIzquierda() {
+		if (not (self.siguienteaDondeIr() == "right"))
+		 	self.siguienteaDondeIr("left") 
+		else self.siguienteaDondeIr()
+	}
+	
+	method puedeIrArriba() {
+		if (not (self.siguienteaDondeIr() == "down")) 
+			self.siguienteaDondeIr("up") 
+		else self.siguienteaDondeIr()
+	}
+	
+	method puedeIrAbajo() {
+		if (not (self.siguienteaDondeIr() == "up")) 
+			self.siguienteaDondeIr("down") 
+		else self.siguienteaDondeIr()}
 	
 	method agregar(parte) {lasPartesDeSnake.add(parte)}
 	
@@ -68,7 +89,7 @@ class ParteDeSnake {
 	var property siguienteaDondeIr = ""
 	var property nroDeParte = 0
 	var property position = game.center()
-	var property image = "cuerpoArAb.png" 
+	var property image = cuerpoIzqDer.image()
 	
 	method siguienteaDondeIr() = siguienteaDondeIr
 	method aDondeIr() = aDondeIr
@@ -80,22 +101,14 @@ class ParteDeSnake {
 	
 	method moverse() {
 		aDondeIr = siguienteaDondeIr
-		if (aDondeIr == "left"){
-			position = position.left(1)
-			image = "cuerpoIzqDer.png"
-		} if (aDondeIr == "up"){
-			position = position.up(1)
-			image = "cuerpoArAb.png"
-		} if (aDondeIr == "right"){
-			position = position.right(1)
-			image = "cuerpoIzqDer.png"
-		} if (aDondeIr == "down"){
-			position = position.down(1)
-			image = "cuerpoArAb.png"
-		}
+		
+		if (aDondeIr == "left") {cuerpoIzqDer.avanzar(self)} 
+		if (aDondeIr == "up") {cuerpoArAb.avanzar(self)} 
+		if (aDondeIr == "right") {cuerpoIzqDer.avanzar(self)} 
+		if (aDondeIr == "down") {cuerpoArAb.avanzar(self)}
+		
 		self.conseguirSiguienteaDondeIr()
-	}	
-	
+	}		
 	
 	method colisionar() {pantallaDeMuerte.iniciar(1)}
 	
